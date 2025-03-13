@@ -47,18 +47,23 @@
 <body class="bg-gris flex flex-col">
 
     <header class="fixed top-0 left-0 w-full bg-negro h-32 p-10 z-50 flex justify-center">
+
         <div>
             <img class="h-12" src="./assets/svg/logo.svg" alt="logotipo comic finder">
         </div>  
+
     </header>
 
     <main class="relative">
+
         <section>
             <div class="bg-[url('./assets/img/hero.png')] bg-cover bg-center bg-fixed h-screen h-96"></div>
         </section>
 
         <section class="m-10">
+
             <h1 class="font-sofia font-sofia-800 text-2xl mb-4">Búsqueda</h1>
+
             <form action="">
 
                 <div  class="relative  w-full pl-10 pr-4 py-2 ">
@@ -97,33 +102,42 @@
                 <button type='submit' class='py-2.5 px-6 mt-8 rounded-full bg-amarillo text-negro cursor-pointer font-sofia font-sofia-800 text-center shadow-xs transition-all duration-500 hover:bg-rojo w-full'>BUSCAR</button>
 
             </form>   
+
         </section>
 
         <section class="m-10 relative z-10 ">
             <div>
                 <h2 class="font-sofia font-sofia-800 text-2xl mb-4">Resultados</h2>
-                <h3></h3>
+                <h3 class="font-sofia font-sofia-200">78524</h3>
             </div>
 
-            <div></div>
+            <div class="py-8">
+                <article class="w-full h-fit border-amarillo">
+                    <img class="h-96 bg-amarillo " src="" alt="">
+                    <h3 class="h-12 m-2 font-sofia font-sofia-500 ">Fanstasctic Four by Dan Slott Vol.1 (Trade Paperbag)</h3>
+                    <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
+                </article>
+            </div>
 
-            <div>
-                <button>
-                    <img src="" alt="">
+            <div class="w-full flex flex-row h-12 justify-center items-center">
+                <button class="px-2" type="button">
+                    <img class="h-5 w-5" src="./assets/svg/first.svg" alt="">
                 </button>
-                <button>
-                    <img src="" alt="">
+                <button class="px-2" type="button">
+                    <img class="h-5 w-5" src="./assets/svg/previous.svg" alt="">
                 </button>
-                <button>
-                    <img src="" alt="">
+                <h3 class="font-sofia font-sofia-800 px-8">1</h3>
+                <button class="px-2" type="button">
+                    <img class="h-5 w-5" src="./assets/svg/next.svg" alt="">
                 </button>
-                <button>
-                    <img src="" alt="">
+                <button class="px-2" type="button">
+                    <img class="h-5 w-5" src="./assets/svg/last.svg" alt="">
                 </button>
             </div>
 
 
         </section>
+
     </main>
 
     <footer>
