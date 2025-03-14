@@ -6,8 +6,13 @@ const $batContainer = $("#bat-container");
 
 
 let bat = [];
-let cantidadBats = 15;
 let repulsionStrength = 200;
+
+function obtenerCantidadBats() {
+    if (window.innerWidth >= 1024) return 15; // lg 
+    if (window.innerWidth >= 768) return 10;   // md 
+    return 7;  // sm y xs 
+}
 
 function interaccionBats() {
     function obtenerBats() {
@@ -27,7 +32,7 @@ function interaccionBats() {
             img.style.transform = `rotate(${initialRotation}deg)`; // Rotación aleatoria
             img.style.transition = "transform 0.2s ease-out";
     
-            $batContainer.appendChild(img); // Agregar imagen al contenedor
+            $batContainer.appendChild(img); // Agrega LS imagen al contenedor
     
             bat.push({
                 el: img,
