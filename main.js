@@ -5,7 +5,7 @@ const $$ = element => document.querySelectorAll(element)
 const $batContainer = $("#bat-container");
 
 let bat = [];
-let cantidadBats = 40;
+let cantidadBats = 20;
 let repulsionStrength = 200;
 
 // Función para obtener y colocar imágenes en el DOM
@@ -45,7 +45,12 @@ function pintarBats() {
             let force = (repulsionStrength - distance) / repulsionStrength;
             obj.vx += Math.cos(angle) * force * 3;
             obj.vy += Math.sin(angle) * force * 3;
+
+            let rotationAngle = (angle * (180 / Math.PI)) + 90; // Convertir de radianes a grados
+            obj.el.style.transform = `rotate(${rotationAngle}deg)`;
         }
+
+        
 
         // Aplicar fricción para suavizar el movimiento
         obj.vx *= 0.9;
