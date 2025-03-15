@@ -67,7 +67,7 @@
         </section>
 
         <!-- SECCION DE FORMULARIO-->
-        <section class="m-10">
+        <section id="container-form-resultados" class="m-10">
 
             <h1 class="font-sofia font-sofia-800 text-2xl mb-4">Búsqueda</h1>
 
@@ -75,7 +75,7 @@
 
                 <div class="w-full lg:w-2/3 lg:mr-10">
                     <div  class="relative w-full pl-10 pr-4 py-2 ">
-                        <input class="w-full bg-transparent font-sofia placeholder:text-negro focus:outline-none" type="text" placeholder="ingresa tu búsqueda">
+                        <input id="input-busqueda" class="w-full bg-transparent font-sofia placeholder:text-negro focus:outline-none" type="text" placeholder="ingresa tu búsqueda">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-0 pointer-events-none">
                             <img class="h-5 w-5 pl-0" src="./assets/svg/find.svg" alt="">
                         </div> 
@@ -91,7 +91,7 @@
 
                         <div class="lg:flex flex-row">
                             <label class="font-sofia font-sofia-800" for="">TIPO</label>
-                            <select class="bg-transparent font-sofia font-sofia-500  focus:outline-none" name="" id="">
+                            <select id="input-type" class="bg-transparent font-sofia font-sofia-500  focus:outline-none" name="">
                                 <option value="">comics</option>
                                 <option value="">personajes</option>
                             </select>
@@ -99,7 +99,7 @@
     
                         <div class="lg:flex flex-row">
                             <label class="font-sofia font-sofia-800" for="">ORDEN</label>
-                            <select class="bg-transparent font-sofia font-sofia-500 focus:outline-none " name="" id="">
+                            <select id="input-sort" class="bg-transparent font-sofia font-sofia-500 focus:outline-none " name="">
                                 <option value="">A/Z</option>
                                 <option value="">Z/A</option>
                                 <option value="">Más nuevos</option>
@@ -109,7 +109,7 @@
                     
                     </div>
     
-                    <button type='submit' class='sm:w-1/3 sm:items-center sm:mt-0 py-2.5 px-6 mt-8 rounded-full bg-amarillo text-negro cursor-pointer font-sofia font-sofia-800 text-center shadow-xs transition-all duration-500 hover:bg-rojo w-full'>BUSCAR</button>
+                    <button type='submit' id="button-buscar" class='sm:w-1/3 sm:items-center sm:mt-0 py-2.5 px-6 mt-8 rounded-full bg-amarillo text-negro cursor-pointer font-sofia font-sofia-800 text-center shadow-xs transition-all duration-500 hover:bg-rojo w-full'>BUSCAR</button>
                 </div>
                 
             </form>   
@@ -122,41 +122,41 @@
             <!-- titulo seccion-->
             <div>
                 <h2 class="font-sofia font-sofia-800 text-2xl mb-4">Resultados</h2>
-                <h3 class="font-sofia font-sofia-200">78524</h3>
+                <h3 id="cantidad-resultados" class="font-sofia font-sofia-200">78524</h3>
             </div>
 
             <!-- luego debo reemplar esto para volverlo dinamico-->
-            <div class="py-8 h-fit">
+            <div id="card-comic" class="py-8 h-fit">
                 <article class="w-full h-fit border-amarillo sm:w-1/3 sm:justify-between md:w-1/4">
-                    <img class="h-96 bg-amarillo md:h-72" src="" alt="">
-                    <h3 class="h-12 m-2 font-sofia font-sofia-500 ">Fanstasctic Four by Dan Slott Vol.1 (Trade Paperbag)</h3>
+                    <img id="img-comic" class="h-96 bg-amarillo md:h-72" src="" alt="">
+                    <h3 id="name-comic" class="h-12 m-2 font-sofia font-sofia-500 ">Fanstasctic Four by Dan Slott Vol.1 (Trade Paperbag)</h3>
                     <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
                 </article>
             </div>
 
             <!-- contenedor de los botones de paginacion-->
             <div class="w-full flex flex-row h-12 justify-center items-center">
-                <button class="px-2" type="button">
+                <button id="button-first" class="px-2" type="button">
                     <svg class="h-5 w-5 fill-current text-negro hover:text-rojo" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 522.3 500">
                         <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
                         <path class="st0" d="M271.8,88.9h0c9.6-9.6,14-22.1,14.5-35,.6-13.4-5.9-25.9-14.6-35.4-8.5-9.2-22.5-14.6-35.4-14.6s-26.3,5.5-35.4,14.6l-1.3,1.3c-25.7,25.4-51.1,51.1-76.7,76.7s-61.4,61.4-92.1,92.1c-2.8,2.8-5.7,5.6-8.5,8.5-5,5.1-9.9,10.7-13,17.1-5.7,11.5-9.3,22.7-9.3,35.8s3.4,23.6,9,35.2c6.2,12.6,18.9,23.3,28.8,33.2l97.9,97.9c21.7,21.7,43.5,43.5,65.2,65.2,9.6,9.5,22.1,14,35.4,14.6,13.4.6,25.9-5.9,35.4-14.6,9.2-8.5,14.6-22.5,14.6-35.4s-5.5-26.3-14.6-35.4-14.9-14.9-22.3-22.3c-32.3-32.3-64.7-64.7-97.1-97.1-14.2-14.2-28.4-28.4-42.6-42.6-6.3-6.4-13.3-12.5-19.1-19.4,2.6,3.4,5.2,6.7,7.8,10.1-1.4-1.9-2.6-3.9-3.5-6.1,1.6,3.9,3.3,7.9,5,11.9-.6-1.7-1.1-3.5-1.4-5.3.6,4.4,1.2,8.9,1.8,13.3-.3-2.3-.3-4.5,0-6.8-.6,4.4-1.2,8.9-1.8,13.3.3-1.8.8-3.5,1.4-5.3-1.6,3.9-3.3,7.9-5,11.9,1-2.2,2.1-4.2,3.5-6.1-2.6,3.4-5.2,6.7-7.8,10.1,7-8.4,15.6-15.8,23.3-23.5l96.8-96.8,61.1-61.1h0Z"/>
                         <path class="st0" d="M507.8,88.9h0c9.6-9.6,14-22.1,14.5-35,.6-13.4-5.9-25.9-14.6-35.4-8.5-9.2-22.5-14.6-35.4-14.6s-26.3,5.5-35.4,14.6l-1.3,1.3c-25.7,25.4-51.1,51.1-76.7,76.7-30.7,30.7-61.4,61.4-92.1,92.1-2.8,2.8-5.7,5.6-8.5,8.5-5,5.1-9.9,10.7-13,17.1-5.7,11.5-9.3,22.7-9.3,35.8s3.4,23.6,9,35.2c6.2,12.6,18.9,23.3,28.8,33.2l97.9,97.9c21.7,21.7,43.5,43.5,65.2,65.2,9.6,9.5,22.1,14,35.4,14.6,13.4.6,25.9-5.9,35.4-14.6,9.2-8.5,14.6-22.5,14.6-35.4s-5.5-26.3-14.6-35.4l-22.3-22.3c-32.3-32.3-64.7-64.7-97.1-97.1l-42.6-42.6c-6.3-6.4-13.3-12.5-19.1-19.4,2.6,3.4,5.2,6.7,7.8,10.1-1.4-1.9-2.6-3.9-3.5-6.1,1.6,3.9,3.3,7.9,5,11.9-.6-1.7-1.1-3.5-1.4-5.3.6,4.4,1.2,8.9,1.8,13.3-.3-2.3-.3-4.5,0-6.8-.6,4.4-1.2,8.9-1.8,13.3.3-1.8.8-3.5,1.4-5.3-1.6,3.9-3.3,7.9-5,11.9,1-2.2,2.1-4.2,3.5-6.1-2.6,3.4-5.2,6.7-7.8,10.1,7-8.4,15.6-15.8,23.3-23.5,32.3-32.3,64.5-64.5,96.8-96.8l61.1-61.1h0Z"/>
                     </svg>
                 </button>
-                <button class="px-2" type="button">
+                <button id="button-previous" class="px-2" type="button">
                     <svg class="h-5 w-5 fill-current text-negro hover:text-rojo" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
                         <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
                         <path class="st0" d="M378.7,88.9h0c9.6-9.6,14-22.1,14.5-35,.6-13.4-5.9-25.9-14.6-35.4-8.5-9.2-22.5-14.6-35.4-14.6s-26.3,5.5-35.4,14.6l-1.3,1.3c-25.7,25.4-51.1,51.1-76.7,76.7-30.7,30.7-61.4,61.4-92.1,92.1-2.8,2.8-5.7,5.6-8.5,8.5-5,5.1-9.9,10.7-13,17.1-5.7,11.5-9.3,22.7-9.3,35.8s3.4,23.6,9,35.2c6.2,12.6,18.9,23.3,28.8,33.2l97.9,97.9c21.7,21.7,43.5,43.5,65.2,65.2,9.6,9.5,22.1,14,35.4,14.6,13.4.6,25.9-5.9,35.4-14.6,9.2-8.5,14.6-22.5,14.6-35.4s-5.5-26.3-14.6-35.4l-22.3-22.3-97.1-97.1c-14.2-14.2-28.4-28.4-42.6-42.6-6.3-6.4-13.3-12.5-19.1-19.4,2.6,3.4,5.2,6.7,7.8,10.1-1.4-1.9-2.6-3.9-3.5-6.1,1.6,3.9,3.3,7.9,5,11.9-.6-1.7-1.1-3.5-1.4-5.3.6,4.4,1.2,8.9,1.8,13.3-.3-2.3-.3-4.5,0-6.8-.6,4.4-1.2,8.9-1.8,13.3.3-1.8.8-3.5,1.4-5.3-1.6,3.9-3.3,7.9-5,11.9,1-2.2,2.1-4.2,3.5-6.1-2.6,3.4-5.2,6.7-7.8,10.1,7-8.4,15.6-15.8,23.3-23.5,32.3-32.3,64.5-64.5,96.8-96.8l61.1-61.1h0Z"/>
                       </svg>
                 </button>
-                <h3 class="font-sofia font-sofia-800 px-8">1</h3>
-                <button class="px-2" type="button">
+                <h3 id="page-number" class="font-sofia font-sofia-800 px-8">1</h3>
+                <button id="button-next" class="px-2" type="button">
                     <svg class="h-5 w-5 fill-current text-negro hover:text-rojo" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
                         <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
                         <path class="st0" d="M121.4,88.9l61.1,61.1c32.3,32.3,64.5,64.5,96.8,96.8,7.7,7.7,16.3,15.1,23.3,23.5-2.6-3.4-5.2-6.7-7.8-10.1,1.4,1.9,2.5,3.9,3.5,6.1-1.7-4-3.4-8-5-11.9.6,1.8,1.1,3.5,1.4,5.3-.6-4.4-1.2-8.9-1.8-13.3.3,2.3.3,4.5,0,6.8.6-4.4,1.2-8.9,1.8-13.3-.3,1.8-.8,3.6-1.4,5.3,1.7-4,3.4-8,5-11.9-.9,2.2-2.1,4.2-3.5,6.1,2.6-3.4,5.2-6.7,7.8-10.1-5.8,6.9-12.8,13-19.1,19.4l-42.6,42.6c-32.4,32.4-64.8,64.8-97.1,97.1-7.4,7.4-14.9,14.9-22.3,22.3-9.1,9.1-14.6,22.5-14.6,35.4s5.4,26.9,14.6,35.4c9.5,8.7,22,15.2,35.4,14.6,13.3-.6,25.8-5.1,35.4-14.6,21.7-21.7,43.5-43.5,65.2-65.2l97.9-97.9c9.9-9.9,22.6-20.6,28.8-33.2,5.6-11.6,9-22.1,9-35.2s-3.6-24.3-9.3-35.8c-3.1-6.4-8-12-13-17.1-2.8-2.9-5.7-5.7-8.5-8.5-30.7-30.7-61.4-61.4-92.1-92.1-25.6-25.6-51-51.3-76.7-76.7l-1.3-1.3c-9.1-9.1-22.5-14.6-35.4-14.6s-26.9,5.4-35.4,14.6c-8.7,9.5-15.2,22-14.6,35.4.5,12.9,4.9,25.4,14.5,35h0Z"/>
                     </svg>
                 </button>
-                <button class="px-2" type="button">
+                <button id="button-last" class="px-2" type="button">
                     <svg class="h-5 w-5 fill-current text-negro hover:text-rojo" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 522.3 500">
                         <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
                         <path class="st0" d="M250.5,88.9h0l61.1,61.1c32.3,32.3,64.5,64.5,96.8,96.8,7.7,7.7,16.3,15.1,23.3,23.5-2.6-3.4-5.2-6.7-7.8-10.1,1.4,1.9,2.5,3.9,3.5,6.1-1.7-4-3.4-8-5-11.9.6,1.8,1.1,3.5,1.4,5.3-.6-4.4-1.2-8.9-1.8-13.3.3,2.3.3,4.5,0,6.8.6-4.4,1.2-8.9,1.8-13.3-.3,1.8-.8,3.6-1.4,5.3,1.7-4,3.4-8,5-11.9-.9,2.2-2.1,4.2-3.5,6.1,2.6-3.4,5.2-6.7,7.8-10.1-5.8,6.9-12.8,13-19.1,19.4l-42.6,42.6-97.1,97.1c-7.4,7.4-14.9,14.9-22.3,22.3-9.1,9.1-14.6,22.5-14.6,35.4s5.4,26.9,14.6,35.4c9.5,8.7,22,15.2,35.4,14.6,13.3-.6,25.8-5.1,35.4-14.6l65.2-65.2,97.9-97.9c9.9-9.9,22.6-20.6,28.8-33.2,5.6-11.6,9-22.1,9-35.2s-3.6-24.3-9.3-35.8c-3.1-6.4-8-12-13-17.1-2.8-2.9-5.7-5.7-8.5-8.5-30.7-30.7-61.4-61.4-92.1-92.1s-51-51.3-76.7-76.7l-1.3-1.3c-9.1-9.1-22.5-14.6-35.4-14.6s-26.9,5.4-35.4,14.6c-8.7,9.5-15.2,22-14.6,35.4.5,12.9,4.9,25.4,14.5,35h0Z"/>
@@ -169,9 +169,9 @@
 
     </main>
 
-    <footer class="h-24 bg-negro w-full">
+    <footer class="h-24 bg-negro flex w-full items-center justify-center">
         <div>
-            <img src="" alt="">
+            <h2 class="font-sofia font-sofia-800 text-amarillo">Hecho por Sara Arredondo 💛</h2>
         </div>
     </footer>
 
