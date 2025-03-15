@@ -1,7 +1,29 @@
 const $ = element => document.querySelector(element);
 const $$ = element => document.querySelectorAll(element)
 
+
+//selectores hero
 const $batContainer = $("#bat-container");
+
+//selectores form
+const $inputBusqueda = $("#input-busqueda")
+const $inputType = $("#input-type")
+const $inputSort = $("#input-sort")
+const $buttonBusqueda = $("#button-busqueda")
+
+//selectores pintar datos
+const $cantidadResultados = $("#cantidad-resultados")
+const $containerCards = $("#container-cards")
+const $cardComic = $("#card-comic")
+const $imgComic = $("#img-comic")
+const $nameComic = $("#name-comic")
+
+//selectores para paginacion
+const $buttonFirst = ("#button-first")
+const $buttonPrevious = ("#button-previous")
+const $buttonNext = ("#button-Next")
+const $buttonLast = ("#button-last")
+const $pageNumber = ("#page-number")
 
 const bat = [];
 const cantidadBats = 15;
