@@ -1,0 +1,20 @@
+/* Estilo general de la barra de desplazamiento */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Fondo de la barra */
+body::-webkit-scrollbar-track {
+    background: #272727;
+}
+
+/* Color de la barra */
+body::-webkit-scrollbar-thumb {
+    background: #D62525;
+    border-radius: 5px;
+}
+
+/* Hover en la barra */
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

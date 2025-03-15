@@ -8,43 +8,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Comic Finder</title>
+    <link rel="stylesheet" href="./style.css">
     <script>
-       tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        negro: "#272727",
-                        amarillo: "#ECD95E",
-                        gris: "#E8E6DF",
-                        rojo: "#D62525"
-                    },
-                    fontFamily: {
-                        sofia: ['Sofia Sans', 'sans-serif'],
-                    },
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    negro: "#272727",
+                    amarillo: "#ECD95E",
+                    gris: "#E8E6DF",
+                    rojo: "#D62525"
+                },
+                fontFamily: {
+                    sofia: ['Sofia Sans', 'sans-serif'],
                 },
             },
-            plugins: [
-                function({ addUtilities }) {
-                    const newUtilities = {
-                        '.non-scaling': {
+        },
+        plugins: [
+            function({ addUtilities }) {
+                const newUtilities = {
+                    '.non-scaling': {
                         'vector-effect': 'non-scaling-stroke',
                     },
                 };
-                    addUtilities(newUtilities);
-                },
-                function({ addUtilities }) {
-                    const newUtilities = {
-                        '.font-sofia-200': { 'font-variation-settings': "'wght' 200" },
-                        '.font-sofia-500': { 'font-variation-settings': "'wght' 500" },
-                        '.font-sofia-800': { 'font-variation-settings': "'wght' 800" },
-                        };
-                    addUtilities(newUtilities);
-                }
-            ]
-        };
+                addUtilities(newUtilities);
+            },
+            function({ addUtilities }) {
+                const newUtilities = {
+                    '.font-sofia-200': { 'font-variation-settings': "'wght' 200" },
+                    '.font-sofia-500': { 'font-variation-settings': "'wght' 500" },
+                    '.font-sofia-800': { 'font-variation-settings': "'wght' 800" },
+                };
+                addUtilities(newUtilities);
+            },
+        ]
+    };
     </script>
 </head>
-<body class="bg-gris flex flex-col">
+<body class="bg-gris flex flex-col overflow-auto scrollbar-custom ">
 
     <header class="fixed top-0 left-0 w-full bg-negro h-32 p-10 z-50 flex justify-center">
 
