@@ -1,13 +1,11 @@
 const $ = element => document.querySelector(element);
 const $$ = element => document.querySelectorAll(element)
 
-
-
 const $batContainer = $("#bat-container");
 
-let bat = [];
-let cantidadBats = 15;
-let repulsionStrength = 200;
+const bat = [];
+const cantidadBats = 15;
+const repulsionStrength = 300;
 
 window.addEventListener("mousemove", (event) => {
     window.mouseX = event.clientX;
@@ -15,6 +13,7 @@ window.addEventListener("mousemove", (event) => {
 });
 
 function interaccionBats() {
+
     function obtenerBats() {
         for (let i = 0; i < cantidadBats; i++) {
             let x = Math.random() * window.innerWidth;  // Posición X aleatoria
@@ -77,8 +76,6 @@ function interaccionBats() {
         requestAnimationFrame(pintarBats);
     }
     
-   
-
     obtenerBats()
     pintarBats()
 }
