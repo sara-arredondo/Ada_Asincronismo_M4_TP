@@ -25,7 +25,6 @@ const $buttonNext = ("#button-Next")
 const $buttonLast = ("#button-last")
 const $pageNumber = ("#page-number")
 
-
 //variables y arrays 
 const bat = [];
 const cantidadBats = 15;
