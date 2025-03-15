@@ -45,7 +45,7 @@
     };
     </script>
 </head>
-<body class="bg-gris flex flex-col overflow-auto scrollbar-custom ">
+<body class="bg-gris flex flex-col overflow-auto">
 
     <header class="fixed top-0 left-0 w-full bg-negro h-32 p-10 z-50 flex justify-center">
 
@@ -70,7 +70,7 @@
         <!-- SECCION DE FORMULARIO-->
         <section id="container-form-resultados" class="m-10">
 
-            <h1 class="font-sofia font-sofia-800 text-2xl mb-4">Búsqueda</h1>
+            <h1 class="font-sofia font-sofia-800 text-2xl mb-4 text-negro">Búsqueda</h1>
 
             <form class="flex flex-col w-full lg:flex-row"  action="">
 
@@ -91,16 +91,16 @@
                     <div class="flex flex-row justify-between mt-4 sm:gap-8 sm:mt-0 lg:mr-10">
 
                         <div class="lg:flex flex-row">
-                            <label class="font-sofia font-sofia-800" for="">TIPO</label>
-                            <select id="input-type" class="bg-transparent font-sofia font-sofia-500  focus:outline-none" name="">
+                            <label class="font-sofia font-sofia-800 text-negro" for="">TIPO</label>
+                            <select id="input-type" class="bg-transparent font-sofia font-sofia-500 text-negro focus:outline-none" name="">
                                 <option value="">comics</option>
                                 <option value="">personajes</option>
                             </select>
                         </div>
     
                         <div class="lg:flex flex-row">
-                            <label class="font-sofia font-sofia-800" for="">ORDEN</label>
-                            <select id="input-sort" class="bg-transparent font-sofia font-sofia-500 focus:outline-none " name="">
+                            <label class="font-sofia font-sofia-800 text-negro" for="">ORDEN</label>
+                            <select id="input-sort" class="bg-transparent font-sofia font-sofia-500 text-negro focus:outline-none " name="">
                                 <option value="">A/Z</option>
                                 <option value="">Z/A</option>
                                 <option value="">Más nuevos</option>
@@ -122,8 +122,8 @@
 
             <!-- titulo seccion-->
             <div>
-                <h2 class="font-sofia font-sofia-800 text-2xl mb-4">Resultados</h2>
-                <h3 id="cantidad-resultados" class="font-sofia font-sofia-200">78524</h3>
+                <h2 class="font-sofia font-sofia-800 text-2xl text-negro mb-4">Resultados</h2>
+                <h3 id="cantidad-resultados" class="font-sofia font-sofia-200 text-negro">78524</h3>
             </div>
 
             <!-- luego debo reemplar esto para volverlo dinamico-->
@@ -150,7 +150,7 @@
                         <path class="st0" d="M378.7,88.9h0c9.6-9.6,14-22.1,14.5-35,.6-13.4-5.9-25.9-14.6-35.4-8.5-9.2-22.5-14.6-35.4-14.6s-26.3,5.5-35.4,14.6l-1.3,1.3c-25.7,25.4-51.1,51.1-76.7,76.7-30.7,30.7-61.4,61.4-92.1,92.1-2.8,2.8-5.7,5.6-8.5,8.5-5,5.1-9.9,10.7-13,17.1-5.7,11.5-9.3,22.7-9.3,35.8s3.4,23.6,9,35.2c6.2,12.6,18.9,23.3,28.8,33.2l97.9,97.9c21.7,21.7,43.5,43.5,65.2,65.2,9.6,9.5,22.1,14,35.4,14.6,13.4.6,25.9-5.9,35.4-14.6,9.2-8.5,14.6-22.5,14.6-35.4s-5.5-26.3-14.6-35.4l-22.3-22.3-97.1-97.1c-14.2-14.2-28.4-28.4-42.6-42.6-6.3-6.4-13.3-12.5-19.1-19.4,2.6,3.4,5.2,6.7,7.8,10.1-1.4-1.9-2.6-3.9-3.5-6.1,1.6,3.9,3.3,7.9,5,11.9-.6-1.7-1.1-3.5-1.4-5.3.6,4.4,1.2,8.9,1.8,13.3-.3-2.3-.3-4.5,0-6.8-.6,4.4-1.2,8.9-1.8,13.3.3-1.8.8-3.5,1.4-5.3-1.6,3.9-3.3,7.9-5,11.9,1-2.2,2.1-4.2,3.5-6.1-2.6,3.4-5.2,6.7-7.8,10.1,7-8.4,15.6-15.8,23.3-23.5,32.3-32.3,64.5-64.5,96.8-96.8l61.1-61.1h0Z"/>
                       </svg>
                 </button>
-                <h3 id="page-number" class="font-sofia font-sofia-800 px-8">1</h3>
+                <h3 id="page-number" class="font-sofia font-sofia-800 px-8 text-negro">1</h3>
                 <button id="button-next" class="px-2" type="button">
                     <svg class="h-5 w-5 fill-current text-negro hover:text-rojo" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
                         <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
