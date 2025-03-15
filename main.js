@@ -30,6 +30,10 @@ const bat = [];
 const cantidadBats = 15;
 const repulsionStrength = 300;
 
+let currentPage = 1
+let comic = []
+let characters = []
+
 window.addEventListener("mousemove", (event) => {
     window.mouseX = event.clientX;
     window.mouseY = event.clientY;
@@ -101,6 +105,10 @@ function interaccionBats() {
     
     obtenerBats()
     pintarBats()
+}
+
+function pintarDatos(arrayComics, ArrayCharacters) {
+
 }
 
 window.onload = () => {
