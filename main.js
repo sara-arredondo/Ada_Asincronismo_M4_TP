@@ -137,13 +137,30 @@ async function obtenerDatos() {
 
 }
 
-function pintarDatos() {
-    
+function pintarDatos(arrayComic) {
+
+    event.preventDefault(event)
+
+    $containerCards.innerHTML = "";
+
+    for (const comic of arrayComic) {
+
+        const imageUrl = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
+
+        $containerCards.innerHTML += `
+            <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/3 sm:justify-between md:w-1/4">
+                    <img class="h-96 w-full bg-amarillo md:h-72" src="${imageUrl}" alt="">
+                    <h3 class="h-16 m-2 font-sofia font-sofia-500 ">${comic.title}</h3>
+                    <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
+            </article>
+        `
+    }
 }
 
 window.onload = async () => {
     interaccionBats();
     await obtenerDatos();
+    pintarDatos(comicData);
 
    
 };
