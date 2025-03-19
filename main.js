@@ -111,12 +111,7 @@ function interaccionBats() {
     pintarBats()
 }
 
-function obtenerDatos(page) {
-
-}
-
-window.onload = async () => {
-    interaccionBats();
+async function obtenerDatos() {
 
     const ts = new Date().getTime();
     const publicKey = "724ede1a75e8d29e8901818d0a0b5078";
@@ -139,6 +134,18 @@ window.onload = async () => {
     } catch (error) {
         console.error("Error al obtener los cómics")
     }
+
+}
+
+function pintarDatos() {
+    
+}
+
+window.onload = async () => {
+    interaccionBats();
+    await obtenerDatos();
+
+   
 };
 
 
