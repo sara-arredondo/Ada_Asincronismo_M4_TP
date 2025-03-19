@@ -36,7 +36,6 @@ const privateKey = "1a97a4c08a9a9cb77917012c60208da5908a07d2";
 const hash = md5(ts + privateKey + publicKey);
 
 let comicData = []
-
 let currentPage = 1
 
 //eventos
@@ -45,6 +44,8 @@ window.addEventListener("mousemove", (event) => {
     window.mouseX = event.clientX;
     window.mouseY = event.clientY;
 });
+
+
 
 // ---------- funciones--------------------------------------------
 
@@ -118,8 +119,6 @@ function interaccionBats() {
 
 async function obtenerDatos() {
 
-    
-
     try {
         const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`, {    
         });
@@ -129,22 +128,19 @@ async function obtenerDatos() {
     } catch (error) {
         console.error("Error al cargar los comics")
     }
-
 }
 
 function pintarDatos(arrayComic) {
 
-
     $containerCards.innerHTML = "";
     
-
     for (const comic of arrayComic) {
 
         const imageUrl = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
 
         $containerCards.innerHTML += `
             <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 ">
-                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-72" src="${imageUrl}" alt="">
+                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-64" src="${imageUrl}" alt="">
                     <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 ">${comic.title}</h3>
                     <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
             </article>
