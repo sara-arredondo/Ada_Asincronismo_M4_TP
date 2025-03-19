@@ -30,14 +30,18 @@ const bat = [];
 const cantidadBats = 15;
 const repulsionStrength = 300;
 
+let comicData = []
+
 let currentPage = 1
-let comic = []
-let characters = []
+
+//eventos
 
 window.addEventListener("mousemove", (event) => {
     window.mouseX = event.clientX;
     window.mouseY = event.clientY;
 });
+
+// ---------- funciones--------------------------------------------
 
 function interaccionBats() {
 
@@ -80,8 +84,8 @@ function interaccionBats() {
             if (distance < repulsionStrength) {
                 let angle = Math.atan2(dy, dx);
                 let force = (repulsionStrength - distance) / repulsionStrength;
-                obj.vx += Math.cos(angle) * force * 3;
-                obj.vy += Math.sin(angle) * force * 3;
+                obj.vx += Math.cos(angle) * force * 2;
+                obj.vy += Math.sin(angle) * force * 2;
     
                 // Aplicar rotación del bat en la dirección opuesta al mouse
                 let rotationAngle = (angle * (180 / Math.PI)) + 90;
@@ -107,10 +111,49 @@ function interaccionBats() {
     pintarBats()
 }
 
-function pintarDatos(arrayComics, ArrayCharacters) {
+function obtenerDatos(page) {
 
 }
 
-window.onload = () => {
+window.onload = async () => {
     interaccionBats();
+
+    const ts = new Date().getTime();
+    const publicKey = "724ede1a75e8d29e8901818d0a0b5078";
+    const privateKey = "1a97a4c08a9a9cb77917012c60208da5908a07d2";
+    const hash = md5(ts + privateKey + publicKey);
+
+    try {
+        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics`, {
+            params: {
+                ts: ts,
+                apikey: publicKey,
+                hash: hash,
+                limit: 20  // cantidad de cómics a obtener
+            }
+        });
+
+        
+        comicData = data.data.results;
+        console.log(comicData);
+    } catch (error) {
+        console.error("Error al obtener los cómics")
+    }
 };
+
+
+
+
+
+
+
+// public key
+
+// 724ede1a75e8d29e8901818d0a0b5078
+
+
+// private key
+
+// 1a97a4c08a9a9cb77917012c60208da5908a07d2
+
+// https://gateway.marvel.com/v1/public/comics?ts={{ts}}&hash={{hash}}
