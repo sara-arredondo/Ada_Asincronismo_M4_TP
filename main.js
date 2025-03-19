@@ -30,6 +30,11 @@ const bat = [];
 const cantidadBats = 15;
 const repulsionStrength = 300;
 
+const ts = new Date().getTime();
+const publicKey = "724ede1a75e8d29e8901818d0a0b5078";
+const privateKey = "1a97a4c08a9a9cb77917012c60208da5908a07d2";
+const hash = md5(ts + privateKey + publicKey);
+
 let comicData = []
 
 let currentPage = 1
@@ -113,44 +118,34 @@ function interaccionBats() {
 
 async function obtenerDatos() {
 
-    const ts = new Date().getTime();
-    const publicKey = "724ede1a75e8d29e8901818d0a0b5078";
-    const privateKey = "1a97a4c08a9a9cb77917012c60208da5908a07d2";
-    const hash = md5(ts + privateKey + publicKey);
+    
 
     try {
-        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics`, {
-            params: {
-                ts: ts,
-                apikey: publicKey,
-                hash: hash,
-                limit: 20  // cantidad de cómics a obtener
-            }
+        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`, {    
         });
 
-        
         comicData = data.data.results;
         console.log(comicData);
     } catch (error) {
-        console.error("Error al obtener los cómics")
+        console.error("Error al cargar los comics")
     }
 
 }
 
 function pintarDatos(arrayComic) {
 
-    event.preventDefault(event)
 
     $containerCards.innerHTML = "";
+    
 
     for (const comic of arrayComic) {
 
         const imageUrl = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
 
         $containerCards.innerHTML += `
-            <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/3 sm:justify-between md:w-1/4">
-                    <img class="h-96 w-full bg-amarillo md:h-72" src="${imageUrl}" alt="">
-                    <h3 class="h-16 m-2 font-sofia font-sofia-500 ">${comic.title}</h3>
+            <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 ">
+                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-72" src="${imageUrl}" alt="">
+                    <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 ">${comic.title}</h3>
                     <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
             </article>
         `
