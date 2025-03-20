@@ -20,11 +20,11 @@ const $imgComic = $("#img-comic")
 const $nameComic = $("#name-comic")
 
 //selectores para paginacion
-const $buttonFirst = ("#button-first")
-const $buttonPrevious = ("#button-previous")
-const $buttonNext = ("#button-Next")
-const $buttonLast = ("#button-last")
-const $pageNumber = ("#page-number")
+const $buttonFirst = $("#button-first")
+const $buttonPrevious = $("#button-previous")
+const $buttonNext = $("#button-next")
+const $buttonLast = $("#button-last")
+const $pageNumber = $("#page-number")
 
 //variables y arrays 
 const bat = [];
@@ -38,6 +38,8 @@ const hash = md5(ts + privateKey + publicKey);
 
 let comicData = []
 let currentPage = 1
+const limit = 25;
+
 
 //eventos
 
@@ -121,24 +123,24 @@ function interaccionBats() {
 async function obtenerDatos() {
 
     try {
-        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`, {    
+        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=0&limit=${limit}`, {    
         });
 
         comicData = data.data.results;
-        totalCount = data.data.total;
+        totalComics = data.data.total;
         console.log(comicData);
     } catch (error) {
         console.error("Error al cargar los comics")
     }
 }
 
-function pintarDatos(arrayComic) {
+function pintarDatos(array) {
 
-    $cantidadResultados.textContent  = totalCount;
+    $cantidadResultados.textContent  = totalComics;
 
     $containerCards.innerHTML = "";
     
-    for (const comic of arrayComic) {
+    for (const comic of array) {
 
         const imageUrl = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
 
@@ -149,11 +151,30 @@ function pintarDatos(arrayComic) {
                     <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
             </article>
         `
-    }
-
-    //$cantidadResultados.textContent = "";
-    
+    }    
 }
+
+$buttonNext.addEventListener("click", async () => {
+    
+    $containerCards.innerHTML = "";
+
+
+        currentPage += 1
+        const offset = (currentPage - 1) * 25;
+
+        try {
+            const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+            });
+
+            comicData = data.data.results;
+            totalComics = data.data.total;
+            pintarDatos(comicData)
+        } catch (error) {
+            console.error("Error al cargar los comics")
+        }
+    
+})
+
 
 window.onload = async () => {
     interaccionBats();
