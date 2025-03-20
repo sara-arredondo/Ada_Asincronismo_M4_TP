@@ -6,6 +6,7 @@ const $$ = element => document.querySelectorAll(element)
 const $batContainer = $("#bat-container");
 
 //selectores form
+const $formBusqueda = $("#form-busqueda")
 const $inputBusqueda = $("#input-busqueda")
 const $inputType = $("#input-type")
 const $inputSort = $("#input-sort")
@@ -124,6 +125,7 @@ async function obtenerDatos() {
         });
 
         comicData = data.data.results;
+        totalCount = data.data.total;
         console.log(comicData);
     } catch (error) {
         console.error("Error al cargar los comics")
@@ -131,6 +133,8 @@ async function obtenerDatos() {
 }
 
 function pintarDatos(arrayComic) {
+
+    $cantidadResultados.textContent  = totalCount;
 
     $containerCards.innerHTML = "";
     
@@ -146,6 +150,9 @@ function pintarDatos(arrayComic) {
             </article>
         `
     }
+
+    //$cantidadResultados.textContent = "";
+    
 }
 
 window.onload = async () => {
