@@ -41,16 +41,12 @@ let currentPage = 1
 const limit = 25;
 
 
-//eventos
+// ---------- funciones--------------------------------------------
 
 window.addEventListener("mousemove", (event) => {
     window.mouseX = event.clientX;
     window.mouseY = event.clientY;
 });
-
-
-
-// ---------- funciones--------------------------------------------
 
 function interaccionBats() {
 
@@ -194,6 +190,25 @@ $buttonPrevious.addEventListener("click", async () => {
         }
 })
 
+$buttonLast.addEventListener("click", async () => {
+
+    $containerCards.innerHTML = "";
+
+    currentPage = Math.round(totalComics / limit)
+    const offset = (currentPage - 1) * limit;
+
+        try {
+            const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+            });
+
+            comicData = data.data.results;
+            totalComics = data.data.total;
+            pintarDatos(comicData)
+            $pageNumber.textContent = currentPage
+        } catch (error) {
+            console.error("Error al cargar los comics")
+        }
+})
 
 window.onload = async () => {
     interaccionBats();
