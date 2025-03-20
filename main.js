@@ -37,6 +37,7 @@ const privateKey = "1a97a4c08a9a9cb77917012c60208da5908a07d2";
 const hash = md5(ts + privateKey + publicKey);
 
 let comicData = []
+let totalComics = []
 let currentPage = 1
 const limit = 20;
 
@@ -118,8 +119,10 @@ function interaccionBats() {
 
 async function obtenerDatos() {
 
+    const offset = (currentPage - 1) * limit;
+
     try {
-        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=0&limit=${limit}`, {    
+        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
         });
 
         comicData = data.data.results;
@@ -128,6 +131,10 @@ async function obtenerDatos() {
     } catch (error) {
         console.error("Error al cargar los comics")
     }
+}
+
+function cargandoComics() {
+    $containerCards.innerHTML = `<p class="w-full text-center font-sofia-800 py-4 text-xl ">CARGANDO COMICS...</p>`;
 }
 
 function pintarDatos(array) {
@@ -153,6 +160,7 @@ function pintarDatos(array) {
 $buttonNext.addEventListener("click", async () => {
     
     $containerCards.innerHTML = "";
+    cargandoComics()
 
     currentPage += 1
     const offset = (currentPage - 1) * limit;
@@ -162,7 +170,7 @@ $buttonNext.addEventListener("click", async () => {
         });
 
         comicData = data.data.results;
-        totalComics = data.data.total;
+        totalComics = data.data.total;  
         pintarDatos(comicData)
         $pageNumber.textContent = currentPage
     } catch (error) {
@@ -173,6 +181,7 @@ $buttonNext.addEventListener("click", async () => {
 $buttonPrevious.addEventListener("click", async () => {
     
     $containerCards.innerHTML = "";
+    cargandoComics()
 
     currentPage -= 1
     const offset = (currentPage - 1) * limit;
@@ -193,6 +202,7 @@ $buttonPrevious.addEventListener("click", async () => {
 $buttonLast.addEventListener("click", async () => {
 
     $containerCards.innerHTML = "";
+    cargandoComics()
 
     currentPage = Math.round(totalComics / limit)
     const offset = (currentPage - 1) * limit;
@@ -202,7 +212,7 @@ $buttonLast.addEventListener("click", async () => {
             });
 
             comicData = data.data.results;
-            totalComics = data.data.total;
+            totalComics = data.data.total;   
             pintarDatos(comicData)
             $pageNumber.textContent = currentPage
         } catch (error) {
@@ -213,6 +223,7 @@ $buttonLast.addEventListener("click", async () => {
 $buttonFirst.addEventListener("click", async () => {
 
     $containerCards.innerHTML = "";
+    cargandoComics()
 
     currentPage = 1
     const offset = (currentPage - 1) * limit;
@@ -232,6 +243,7 @@ $buttonFirst.addEventListener("click", async () => {
 
 window.onload = async () => {
     interaccionBats();
+    cargandoComics()
     await obtenerDatos();
     pintarDatos(comicData);
 
