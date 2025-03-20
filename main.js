@@ -158,9 +158,28 @@ $buttonNext.addEventListener("click", async () => {
     
     $containerCards.innerHTML = "";
 
+    currentPage += 1
+    const offset = (currentPage - 1) * limit;
 
-        currentPage += 1
-        const offset = (currentPage - 1) * 25;
+    try {
+        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+        });
+
+        comicData = data.data.results;
+        totalComics = data.data.total;
+        pintarDatos(comicData)
+        $pageNumber.textContent = currentPage
+    } catch (error) {
+        console.error("Error al cargar los comics")
+    }
+})
+
+$buttonPrevious.addEventListener("click", async () => {
+    
+    $containerCards.innerHTML = "";
+
+    currentPage -= 1
+    const offset = (currentPage - 1) * limit;
 
         try {
             const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
@@ -169,10 +188,10 @@ $buttonNext.addEventListener("click", async () => {
             comicData = data.data.results;
             totalComics = data.data.total;
             pintarDatos(comicData)
+            $pageNumber.textContent = currentPage
         } catch (error) {
             console.error("Error al cargar los comics")
         }
-    
 })
 
 
