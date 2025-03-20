@@ -38,7 +38,7 @@ const hash = md5(ts + privateKey + publicKey);
 
 let comicData = []
 let currentPage = 1
-const limit = 25;
+const limit = 20;
 
 
 // ---------- funciones--------------------------------------------
@@ -141,9 +141,9 @@ function pintarDatos(array) {
         const imageUrl = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
 
         $containerCards.innerHTML += `
-            <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 ">
-                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-64" src="${imageUrl}" alt="">
-                    <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 ">${comic.title}</h3>
+            <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
+                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-64 lg:h-72" src="${imageUrl}" alt="">
+                    <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 2xl:h-24">${comic.title}</h3>
                     <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
             </article>
         `
@@ -247,7 +247,6 @@ window.onload = async () => {
 // public key
 
 // 724ede1a75e8d29e8901818d0a0b5078
-
 
 // private key
 
