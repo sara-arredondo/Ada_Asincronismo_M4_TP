@@ -35,6 +35,7 @@ let elements = []
 let totalElements = []
 let currentPage = 1;
 let selectType = "character"
+let selectStatus = ""
 
 
 
@@ -123,6 +124,14 @@ $inputType.addEventListener("change", (event) => {
     obtenerDatos(currentPage);
 })
 
+$inputStatus.addEventListener("change", (event) => {
+
+    selectStatus = event.target.value;
+    currentPage = 1;
+    $pageNumber.textContent = currentPage
+    obtenerDatos(currentPage);
+})
+
 function cargandoDatos() {
     $containerCards.innerHTML = `
     
@@ -138,7 +147,7 @@ async function obtenerDatos(page) {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
         });
 
         elements = data.results
@@ -197,7 +206,7 @@ $buttonNext.addEventListener("click", async () => {
     currentPage += 1
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
         });
 
         elements = data.results
@@ -216,7 +225,7 @@ $buttonPrevious.addEventListener("click", async () => {
     currentPage -= 1
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
         });
 
         elements = data.results
@@ -237,7 +246,7 @@ $buttonLast.addEventListener("click", async () => {
     
 
         try {
-            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}`, {    
+            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
             });
 
             elements = data.results
@@ -258,7 +267,7 @@ $buttonFirst.addEventListener("click", async () => {
     currentPage = 1
     
         try {
-            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}`, {    
+            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
             });
 
             elements = data.results
