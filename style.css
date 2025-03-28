@@ -10,11 +10,11 @@ body::-webkit-scrollbar-track {
 
 /* Color de la barra */
 body::-webkit-scrollbar-thumb {
-    background: #ECD95E;
+    background: #00aecf;
     border-radius: 5px;
 }
 
 /* Hover en la barra */
 body::-webkit-scrollbar-thumb:hover {
-    background: #D62525;
+    background: #fc467f;
 }

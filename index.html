@@ -16,10 +16,10 @@
         theme: {
             extend: {
                 colors: {
-                    negro: "#272727",
-                    amarillo: "#ECD95E",
+                    negro: "#001415",
+                    amarillo: "#00aecf",
                     gris: "#E8E6DF",
-                    rojo: "#D62525"
+                    rojo: "#fc467f"
                 },
                 fontFamily: {
                     sofia: ['Sofia Sans', 'sans-serif'],
@@ -53,10 +53,10 @@
 </head>
 <body class="bg-gris flex flex-col overflow-auto scroll-smooth md:scroll-auto">
 
-    <header class="fixed top-0 left-0 w-full bg-negro h-32 p-10 z-50 flex justify-center">
+    <header class="fixed top-0 left-0 w-full h-32 p-10 z-50 flex justify-center">
 
         <div>
-            <img class="h-12" src="./assets/svg/logo.svg" alt="logotipo comic finder">
+            <img class="h-24" src="./assets/img/logo.png" alt="logotipo comic finder">
         </div>  
 
     </header>
@@ -66,7 +66,7 @@
         
         <!-- SECCION DE HERO-->
         <section>
-            <div class="bg-[url('./assets/img/hero.png')] relative bg-cover bg-center bg-fixed h-screen h-96">   
+            <div class="bg-[url('./assets/img/hero.jpg')] relative bg-cover bg-center bg-fixed h-screen h-96">   
             </div>
 
             <div id="bat-container" class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
@@ -99,8 +99,8 @@
                         <div class="lg:flex flex-row">
                             <label class="font-sofia font-sofia-800 text-negro" for="">TIPO</label>
                             <select id="input-type" class="bg-transparent font-sofia font-sofia-500 text-negro focus:outline-none" name="">
-                                <option value="">comics</option>
                                 <option value="">personajes</option>
+                                <option value="">episodios</option>
                             </select>
                         </div>
     

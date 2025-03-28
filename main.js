@@ -28,21 +28,16 @@ const $pageNumber = $("#page-number")
 
 //variables y arrays 
 const bat = [];
-const cantidadBats = 15;
+const cantidadBats = 5;
 const repulsionStrength = 300;
 
-const ts = new Date().getTime();
-const publicKey = "724ede1a75e8d29e8901818d0a0b5078";
-const privateKey = "1a97a4c08a9a9cb77917012c60208da5908a07d2";
-const hash = md5(ts + privateKey + publicKey);
-
-let comicData = []
+let characters = []
 let totalComics = []
 let currentPage = 1
 const limit = 20;
 
 
-// ---------- funciones--------------------------------------------
+// ---------- funciones hero bats --------------------------------------------
 
 window.addEventListener("mousemove", (event) => {
     window.mouseX = event.clientX;
@@ -117,47 +112,51 @@ function interaccionBats() {
     pintarBats()
 }
 
-async function obtenerDatos() {
+//-------------- funciones datos form y pintar-----------------
 
-    const offset = (currentPage - 1) * limit;
+async function obtenerDatos(page) {
 
     try {
-        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
         });
 
-        comicData = data.data.results;
-        totalComics = data.data.total;
-        console.log(comicData);
+        console.log(characters);
     } catch (error) {
-        console.error("Error al cargar los comics")
+        console.error(error)
     }
 }
+
+$formBusqueda.addEventListener("click", async () => {
+
+
+})
 
 function cargandoComics() {
     $containerCards.innerHTML = `<p class="w-full text-center font-sofia-800 py-4 text-xl ">CARGANDO COMICS...</p>`;
 }
 
-function pintarDatos(array) {
+function pintarDatos(arrayPersonajes) {
 
-    $cantidadResultados.textContent  = totalComics;
+     //$cantidadResultados.textContent  = totalComics;
 
     $containerCards.innerHTML = "";
     
-    for (const comic of array) {
-
-        const imageUrl = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
+    for (const personajes of arrayPersonajes) {
 
         $containerCards.innerHTML += `
             <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
-                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-64 lg:h-72" src="${imageUrl}" alt="">
-                    <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 2xl:h-24">${comic.title}</h3>
+                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-64 lg:h-72" src="${personajes.image}" alt="">
+                    <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 2xl:h-24">${personajes.name}</h3>
                     <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
             </article>
         `
     }    
 }
 
-$buttonNext.addEventListener("click", async () => {
+
+//----------------- funciones paginacion-----------------------------------------------
+
+/*$buttonNext.addEventListener("click", async () => {
     
     $containerCards.innerHTML = "";
     cargandoComics()
@@ -241,13 +240,12 @@ $buttonFirst.addEventListener("click", async () => {
         }
 })
 
+*/
+
 window.onload = async () => {
     interaccionBats();
     cargandoComics()
-    await obtenerDatos();
-    pintarDatos(comicData);
-
-   
+    await obtenerDatos(currentPage);
 };
 
 
