@@ -37,6 +37,7 @@ let totalElements = []
 let currentPage = 1;
 let selectType = "character"
 let selectStatus = ""
+let selectGender = ""
 
 
 
@@ -133,8 +134,12 @@ $inputStatus.addEventListener("change", (event) => {
     obtenerDatos(currentPage);
 })
 
-$inputGender.addEventListener("change", () => {
-    
+$inputGender.addEventListener("change", (event) => {
+
+    selectGender = event.target.value;
+    currentPage = 1;
+    $pageNumber.textContent = currentPage
+    obtenerDatos(currentPage);
 })
 
 function cargandoDatos() {
@@ -152,7 +157,7 @@ async function obtenerDatos(page) {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
         });
 
         elements = data.results
@@ -207,7 +212,7 @@ $buttonNext.addEventListener("click", async () => {
     currentPage += 1
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
         });
 
         elements = data.results
@@ -226,7 +231,7 @@ $buttonPrevious.addEventListener("click", async () => {
     currentPage -= 1
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
         });
 
         elements = data.results
@@ -247,7 +252,7 @@ $buttonLast.addEventListener("click", async () => {
     
 
         try {
-            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
+            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
             });
 
             elements = data.results
@@ -268,7 +273,7 @@ $buttonFirst.addEventListener("click", async () => {
     currentPage = 1
     
         try {
-            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}`, {    
+            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
             });
 
             elements = data.results
@@ -288,19 +293,3 @@ window.onload = async () => {
     await obtenerDatos(currentPage);
     pintarDatos(elements)
 };
-
-
-
-
-
-
-
-// public key
-
-// 724ede1a75e8d29e8901818d0a0b5078
-
-// private key
-
-// 1a97a4c08a9a9cb77917012c60208da5908a07d2
-
-// https://gateway.marvel.com/v1/public/comics?ts={{ts}}&hash={{hash}}
