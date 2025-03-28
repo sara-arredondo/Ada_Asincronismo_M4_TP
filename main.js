@@ -10,6 +10,7 @@ const $formBusqueda = $("#form-busqueda")
 const $inputBusqueda = $("#input-busqueda")
 const $inputType = $("#input-type")
 const $inputStatus = $("#input-status")
+const $inputGender = $("#input-gender")
 const $buttonBusqueda = $("#button-busqueda")
 
 //selectores pintar datos
@@ -132,6 +133,10 @@ $inputStatus.addEventListener("change", (event) => {
     obtenerDatos(currentPage);
 })
 
+$inputGender.addEventListener("change", () => {
+    
+})
+
 function cargandoDatos() {
     $containerCards.innerHTML = `
     
@@ -152,7 +157,7 @@ async function obtenerDatos(page) {
 
         elements = data.results
         totalElements = data.info.count
-        $cantidadResultados.textContent  = totalElements
+        $cantidadResultados.textContent = totalElements
         pintarDatos(elements)
         console.log(elements);
     } catch (error) {
@@ -191,10 +196,6 @@ function pintarDatos(arrayDatos) {
         } 
     }
 }
-
-
-
-
 
 //----------------- funciones paginacion-----------------------------------------------
 
@@ -279,7 +280,6 @@ $buttonFirst.addEventListener("click", async () => {
             console.error("Error al cargar los comics")
         }
 })
-
 
 
 window.onload = async () => {
