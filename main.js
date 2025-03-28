@@ -32,9 +32,8 @@ const cantidadBats = 5;
 const repulsionStrength = 300;
 
 let characters = []
-let totalComics = []
-let currentPage = 1
-const limit = 20;
+let totalElements = []
+let currentPage = 1;
 
 
 // ---------- funciones hero bats --------------------------------------------
@@ -112,32 +111,25 @@ function interaccionBats() {
     pintarBats()
 }
 
-//-------------- funciones datos form y pintar-----------------
-
 async function obtenerDatos(page) {
 
     try {
         const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
         });
 
+        characters = data.results
+        totalElements = data.info.count;
+        $cantidadResultados.textContent  = totalElements 
+        pintarDatos(characters)
         console.log(characters);
     } catch (error) {
         console.error(error)
     }
 }
 
-$formBusqueda.addEventListener("click", async () => {
-
-
-})
-
-function cargandoComics() {
-    $containerCards.innerHTML = `<p class="w-full text-center font-sofia-800 py-4 text-xl ">CARGANDO COMICS...</p>`;
-}
-
 function pintarDatos(arrayPersonajes) {
 
-     //$cantidadResultados.textContent  = totalComics;
+   // 
 
     $containerCards.innerHTML = "";
     
@@ -145,32 +137,34 @@ function pintarDatos(arrayPersonajes) {
 
         $containerCards.innerHTML += `
             <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
-                    <img class="h-96 w-full bg-amarillo sm:h-56 md:h-64 lg:h-72" src="${personajes.image}" alt="">
-                    <h3 class="h-16 m-2 font-sofia font-sofia-500 sm:h-28 sm:mt-2 2xl:h-24">${personajes.name}</h3>
-                    <img class="non-scaling" src="./assets/svg/linea-amarilla.svg" alt="">
+                <img class=" w-full bg-amarillo" src="${personajes.image}" alt="">
+                <h3 class="m-2 font-sofia font-sofia-500">${personajes.name}</h3>
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
             </article>
         `
     }    
 }
 
+function cargandoComics() {
+    $containerCards.innerHTML = `<p class="w-full text-center font-sofia-800 py-4 text-xl ">CARGANDO COMICS...</p>`;
+}
+
+
 
 //----------------- funciones paginacion-----------------------------------------------
 
-/*$buttonNext.addEventListener("click", async () => {
+$buttonNext.addEventListener("click", async () => {
     
     $containerCards.innerHTML = "";
     cargandoComics()
 
     currentPage += 1
-    const offset = (currentPage - 1) * limit;
-
     try {
-        const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+        const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
         });
 
-        comicData = data.data.results;
-        totalComics = data.data.total;  
-        pintarDatos(comicData)
+        characters = data.results
+        pintarDatos(characters)
         $pageNumber.textContent = currentPage
     } catch (error) {
         console.error("Error al cargar los comics")
@@ -183,19 +177,17 @@ $buttonPrevious.addEventListener("click", async () => {
     cargandoComics()
 
     currentPage -= 1
-    const offset = (currentPage - 1) * limit;
 
-        try {
-            const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
-            });
+    try {
+        const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
+        });
 
-            comicData = data.data.results;
-            totalComics = data.data.total;
-            pintarDatos(comicData)
-            $pageNumber.textContent = currentPage
-        } catch (error) {
-            console.error("Error al cargar los comics")
-        }
+        characters = data.results
+        pintarDatos(characters)
+        $pageNumber.textContent = currentPage
+    } catch (error) {
+        console.error("Error al cargar los comics")
+    }
 })
 
 $buttonLast.addEventListener("click", async () => {
@@ -203,16 +195,18 @@ $buttonLast.addEventListener("click", async () => {
     $containerCards.innerHTML = "";
     cargandoComics()
 
-    currentPage = Math.round(totalComics / limit)
-    const offset = (currentPage - 1) * limit;
+    currentPage = Math.ceil(totalElements / 20)
+    console.log(currentPage)
+    
 
         try {
-            const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+            const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
             });
 
-            comicData = data.data.results;
-            totalComics = data.data.total;   
-            pintarDatos(comicData)
+            characters = data.results
+            pintarDatos(characters)
+            totalElements = data.info.count;   
+            
             $pageNumber.textContent = currentPage
         } catch (error) {
             console.error("Error al cargar los comics")
@@ -240,12 +234,12 @@ $buttonFirst.addEventListener("click", async () => {
         }
 })
 
-*/
+
 
 window.onload = async () => {
     interaccionBats();
-    cargandoComics()
     await obtenerDatos(currentPage);
+    pintarDatos(characters)
 };
 
 
