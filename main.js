@@ -9,7 +9,7 @@ const $batContainer = $("#bat-container");
 const $formBusqueda = $("#form-busqueda")
 const $inputBusqueda = $("#input-busqueda")
 const $inputType = $("#input-type")
-const $inputSort = $("#input-sort")
+const $inputStatus = $("#input-status")
 const $buttonBusqueda = $("#button-busqueda")
 
 //selectores pintar datos
@@ -123,6 +123,14 @@ $inputType.addEventListener("change", (event) => {
     obtenerDatos(currentPage);
 })
 
+function cargandoDatos() {
+    $containerCards.innerHTML = `
+    
+        <div class="flex justify-center items-center w-full h-96">
+            <div class="lds-circle"><div></div></div>
+        </div>`;
+}
+
 async function obtenerDatos(page) {
 
     cargandoDatos()
@@ -153,9 +161,9 @@ function pintarDatos(arrayDatos) {
 
             $containerCards.innerHTML += `
                 <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
-                    <img class=" w-full bg-amarillo" src="${personaje.image}" alt="">
+                    <img class=" w-full bg-amarillo" src="${personaje.image}" alt="imagen del personaje">
                     <h3 class="m-2 font-sofia font-sofia-500">${personaje.name}</h3>
-                    <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                    <img class="non-scaling" src="./assets/svg/linea.svg" alt="decorativo">
                 </article>
             `
         } 
@@ -175,13 +183,8 @@ function pintarDatos(arrayDatos) {
     }
 }
 
-function cargandoDatos() {
-    $containerCards.innerHTML = `
-    
-        <div class="flex justify-center items-center w-full h-96">
-            <div class="lds-circle"><div></div></div>
-        </div>`;
-}
+
+
 
 
 //----------------- funciones paginacion-----------------------------------------------
