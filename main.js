@@ -111,6 +111,9 @@ function interaccionBats() {
     pintarBats()
 }
 
+//----------------- funciones pricipales  -----------------------------------------------
+
+
 async function obtenerDatos(page) {
 
     try {
@@ -148,7 +151,6 @@ function pintarDatos(arrayPersonajes) {
 function cargandoComics() {
     $containerCards.innerHTML = `<p class="w-full text-center font-sofia-800 py-4 text-xl ">CARGANDO COMICS...</p>`;
 }
-
 
 
 //----------------- funciones paginacion-----------------------------------------------
@@ -219,15 +221,15 @@ $buttonFirst.addEventListener("click", async () => {
     cargandoComics()
 
     currentPage = 1
-    const offset = (currentPage - 1) * limit;
-
+    
         try {
-            const {data} = await axios(`https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`, {    
+            const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
             });
 
-            comicData = data.data.results;
-            totalComics = data.data.total;
-            pintarDatos(comicData)
+            characters = data.results
+            pintarDatos(characters)
+            totalElements = data.info.count;   
+            
             $pageNumber.textContent = currentPage
         } catch (error) {
             console.error("Error al cargar los comics")
