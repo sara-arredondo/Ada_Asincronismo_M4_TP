@@ -116,6 +116,10 @@ function interaccionBats() {
 
 async function obtenerDatos(page) {
 
+    cargandoComics()
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     try {
         const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${currentPage}`, {    
         });
@@ -149,7 +153,11 @@ function pintarDatos(arrayPersonajes) {
 }
 
 function cargandoComics() {
-    $containerCards.innerHTML = `<p class="w-full text-center font-sofia-800 py-4 text-xl ">CARGANDO COMICS...</p>`;
+    $containerCards.innerHTML = `
+    
+        <div class="flex justify-center items-center w-full h-96">
+            <div class="lds-circle"><div></div></div>
+        </div>`;
 }
 
 
@@ -240,6 +248,7 @@ $buttonFirst.addEventListener("click", async () => {
 
 window.onload = async () => {
     interaccionBats();
+    cargandoComics() 
     await obtenerDatos(currentPage);
     pintarDatos(characters)
 };
