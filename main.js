@@ -119,7 +119,11 @@ function interaccionBats() {
 
 //----------------- funciones de filtros -----------------------------------------------
 
-$inputBusqueda.addEventListener("input", (event) => {
+
+// si quisiera el filtro funcione de forma autonoma sin el boton de busqueda
+
+
+/*$inputBusqueda.addEventListener("input", (event) => {
 
     filterName = event.target.value;
     currentPage = 1;
@@ -150,9 +154,9 @@ $inputGender.addEventListener("change", (event) => {
     currentPage = 1;
     $pageNumber.textContent = currentPage
     obtenerDatos(currentPage);
-})
+})*/
 
-$buttonBusqueda.addEventListener("submit", (event) => {
+$formBusqueda.addEventListener("submit", (event) => {
 
     event.preventDefault();
 
