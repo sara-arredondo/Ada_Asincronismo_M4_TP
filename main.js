@@ -119,6 +119,7 @@ $inputType.addEventListener("change", (event) => {
 
     selectType = event.target.value;
     currentPage = 1;
+    $pageNumber.textContent = currentPage
     obtenerDatos(currentPage);
 })
 
