@@ -152,6 +152,20 @@ $inputGender.addEventListener("change", (event) => {
     obtenerDatos(currentPage);
 })
 
+$buttonBusqueda.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    filterName = $inputBusqueda.value;
+    selectType = $inputType.value;
+    selectStatus = $inputStatus.value;
+    selectGender = $inputGender.value;
+
+    currentPage = 1;
+    $pageNumber.textContent = currentPage;
+
+    obtenerDatos(currentPage);
+})
 //----------------- funciones pricipales  -----------------------------------------------
 
 function cargandoDatos() {
