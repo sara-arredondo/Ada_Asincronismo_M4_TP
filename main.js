@@ -17,7 +17,7 @@ const $buttonBusqueda = $("#button-busqueda")
 const $cantidadResultados = $("#cantidad-resultados")
 const $containerCards = $("#container-cards")
 const $cardComic = $("#card-comic")
-const $imgComic = $("#img-comic")
+const $imgComic = $$(".img-comic")
 const $nameComic = $("#name-comic")
 
 const $containerDetailsPersonajes = $("#container-details-personajes")
@@ -120,44 +120,7 @@ function interaccionBats() {
     pintarBats()
 }
 
-//----------------- funciones de filtros -----------------------------------------------
-
-
-// si quisiera que el filtro funcione de forma autonoma sin el boton de busqueda
-
-
-/*$inputBusqueda.addEventListener("input", (event) => {
-
-    filterName = event.target.value;
-    currentPage = 1;
-    $pageNumber.textContent = currentPage
-    obtenerDatos(currentPage);
-
-})
-
-$inputType.addEventListener("change", (event) => {
-
-    selectType = event.target.value;
-    currentPage = 1;
-    $pageNumber.textContent = currentPage
-    obtenerDatos(currentPage);
-})
-
-$inputStatus.addEventListener("change", (event) => {
-
-    selectStatus = event.target.value;
-    currentPage = 1;
-    $pageNumber.textContent = currentPage
-    obtenerDatos(currentPage);
-})
-
-$inputGender.addEventListener("change", (event) => {
-
-    selectGender = event.target.value;
-    currentPage = 1;
-    $pageNumber.textContent = currentPage
-    obtenerDatos(currentPage);
-})*/
+//----------------- funcion de filtros -----------------------------------------------
 
 $formBusqueda.addEventListener("submit", (event) => {
 
@@ -173,6 +136,7 @@ $formBusqueda.addEventListener("submit", (event) => {
 
     obtenerDatos(currentPage);
 })
+
 //----------------- funciones pricipales  -----------------------------------------------
 
 function cargandoDatos() {
@@ -213,7 +177,7 @@ function pintarDatos(arrayDatos) {
 
             $containerCards.innerHTML += `
                 <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
-                    <img class=" w-full bg-amarillo" src="${personaje.image}" alt="imagen del personaje">
+                    <img class="img-comic w-full bg-amarillo" src="${personaje.image}" alt="imagen del personaje">
                     <h3 class="my-2 font-sofia font-sofia-800">${personaje.name}</h3>
                     <img class="non-scaling" src="./assets/svg/linea.svg" alt="decorativo">
                 </article>
@@ -234,6 +198,18 @@ function pintarDatos(arrayDatos) {
         } 
     }
 }
+
+
+function clicImagenes() {
+
+    $imgComic.forEach(img => {
+        img.addEventListener("click", () => {
+
+            
+        })
+    })
+}
+
 
 //----------------- funciones paginacion-----------------------------------------------
 
@@ -326,3 +302,43 @@ window.onload = async () => {
     await obtenerDatos(currentPage);
     pintarDatos(elements)
 };
+
+
+
+
+
+// si quisiera que el filtro funcione de forma autonoma sin el boton de busqueda
+
+
+/*$inputBusqueda.addEventListener("input", (event) => {
+
+    filterName = event.target.value;
+    currentPage = 1;
+    $pageNumber.textContent = currentPage
+    obtenerDatos(currentPage);
+
+})
+
+$inputType.addEventListener("change", (event) => {
+
+    selectType = event.target.value;
+    currentPage = 1;
+    $pageNumber.textContent = currentPage
+    obtenerDatos(currentPage);
+})
+
+$inputStatus.addEventListener("change", (event) => {
+
+    selectStatus = event.target.value;
+    currentPage = 1;
+    $pageNumber.textContent = currentPage
+    obtenerDatos(currentPage);
+})
+
+$inputGender.addEventListener("change", (event) => {
+
+    selectGender = event.target.value;
+    currentPage = 1;
+    $pageNumber.textContent = currentPage
+    obtenerDatos(currentPage);
+})*/
