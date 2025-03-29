@@ -16,7 +16,6 @@ const $buttonBusqueda = $("#button-busqueda")
 //selectores pintar datos
 const $cantidadResultados = $("#cantidad-resultados")
 const $containerCards = $("#container-cards")
-const $cardComic = $("#card-comic")
 const $imgComic = $$(".img-comic")
 const $nameComic = $("#name-comic")
 
@@ -176,7 +175,7 @@ function pintarDatos(arrayDatos) {
         for (const personaje of arrayDatos) {
 
             $containerCards.innerHTML += `
-                <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
+                <article id="${personaje.id}" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
                     <img class="img-comic w-full bg-amarillo cursor-pointer transform transition duration-300 hover:scale-105" src="${personaje.image}" alt="imagen del personaje">
                     <h3 class="my-2 font-sofia font-sofia-800">${personaje.name}</h3>
                 </article>
@@ -202,26 +201,76 @@ function pintarDatos(arrayDatos) {
 
 function clicImagenes() {
 
-    $$(".img-comic").forEach(img => {
-        img.addEventListener("click", () => {
+    $containerCards.addEventListener("click", (event) => {
+        if (event.target.classList.contains("img-comic")) {
 
-            $containerCards .classList.remove("flex")
-            $containerCards .classList.add("hidden")
+            // el metood closest sirve para buscar el padre m[as cercano que coincida con el selector dado, as[i
+            // me ahorro tener que recorrerlo manualmente]
+
+            const card = event.target.closest("article");  
+            const id = card.dataset.id;
+
+            $containerCards.classList.remove("flex");
+            $containerCards.classList.add("hidden");
     
-            $containerDetailsPersonajes.classList.remove("hidden")
-            $containerDetailsPersonajes.classList.add("flex") 
-        })
-    })
+            $containerDetailsPersonajes.classList.remove("hidden");
+            $containerDetailsPersonajes.classList.add("flex"); 
+
+            pintarDatosPersonajes()
+        }
+    });
+    
 }
 
 function pintarDatosPersonajes(arrayDatos) {
 
-    $containerDetailsPersonajes.innerHTML = ""
-
+   
     for (const personaje of arrayDatos) {
 
         $containerDetailsPersonajes.innerHTML = `
-            
+             <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
+                    <div class="flex flex-col m-auto">
+                        <img src="${personaje.image}" alt="" class="w-96 h-96 bg-negro">
+                    </div>
+    
+                    <div>
+                        <h1 class="font-sofia font-sofia-800 text-3xl mt-4 text-negro text-center">${personaje.name}</h1>
+                        <div class="flex flex-row justify-between my-4">
+                            <h2 class="font-sofia font-sofia-800">Especie</h2>
+                            <h2 class="font-sofia font-sofia-500"></h2>
+                        </div>
+    
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+    
+                        <div class="flex flex-row justify-between my-4">
+                            <h2 class="font-sofia font-sofia-800">Origen</h2>
+                            <h2 class="font-sofia font-sofia-500">Tierra</h2>
+                        </div>
+    
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+    
+                        <div class="flex flex-row justify-between my-4">
+                            <h2 class="font-sofia font-sofia-800">Ubicación</h2>
+                            <h2 class="font-sofia font-sofia-500">Tierra</h2>
+                        </div>
+    
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                    </div>
+                </div>
+                
+                <div >
+                    <div class="mt-8">
+                        <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Episodios relacionados</h1>
+                    </div>
+    
+                    <article id="card-comic" class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                        <h3 class="h-18 my-2font-sofia font-sofia-800">Episodio N°</h3>    
+                        <h3 class="h-18 my-2 font-sofia font-sofia-500"></h3>
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                    </article>
+    
+                </div>
         `
     }
 }
@@ -316,7 +365,8 @@ window.onload = async () => {
     cargandoDatos()
     await obtenerDatos(currentPage);
     pintarDatos(elements)
-    clicImagenes() 
+    clicImagenes()
+    pintarDatosPersonajes(elements)
 };
 
 
