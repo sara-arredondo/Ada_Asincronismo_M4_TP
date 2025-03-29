@@ -20,6 +20,9 @@ const $cardComic = $("#card-comic")
 const $imgComic = $("#img-comic")
 const $nameComic = $("#name-comic")
 
+const $containerDetailsPersonajes = $("#container-details-personajes")
+const $containerDetailsEpisodios = $("#container-details-episodios")
+
 //selectores para paginacion
 const $buttonFirst = $("#button-first")
 const $buttonPrevious = $("#button-previous")
@@ -120,7 +123,7 @@ function interaccionBats() {
 //----------------- funciones de filtros -----------------------------------------------
 
 
-// si quisiera el filtro funcione de forma autonoma sin el boton de busqueda
+// si quisiera que el filtro funcione de forma autonoma sin el boton de busqueda
 
 
 /*$inputBusqueda.addEventListener("input", (event) => {
