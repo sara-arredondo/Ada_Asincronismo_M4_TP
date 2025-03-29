@@ -177,9 +177,8 @@ function pintarDatos(arrayDatos) {
 
             $containerCards.innerHTML += `
                 <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
-                    <img class="img-comic w-full bg-amarillo cursor-pointer" src="${personaje.image}" alt="imagen del personaje">
+                    <img class="img-comic w-full bg-amarillo cursor-pointer transform transition duration-300 hover:scale-105" src="${personaje.image}" alt="imagen del personaje">
                     <h3 class="my-2 font-sofia font-sofia-800">${personaje.name}</h3>
-                    <img class="non-scaling " src="./assets/svg/linea.svg" alt="decorativo">
                 </article>
             `
         } 
@@ -201,7 +200,6 @@ function pintarDatos(arrayDatos) {
     
 }
 
-
 function clicImagenes() {
 
     $$(".img-comic").forEach(img => {
@@ -216,6 +214,17 @@ function clicImagenes() {
     })
 }
 
+function pintarDatosPersonajes(arrayDatos) {
+
+    $containerDetailsPersonajes.innerHTML = ""
+
+    for (const personaje of arrayDatos) {
+
+        $containerDetailsPersonajes.innerHTML = `
+            
+        `
+    }
+}
 
 //----------------- funciones paginacion-----------------------------------------------
 
