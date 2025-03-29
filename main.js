@@ -177,12 +177,13 @@ function pintarDatos(arrayDatos) {
 
             $containerCards.innerHTML += `
                 <article id="card-comic" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
-                    <img class="img-comic w-full bg-amarillo" src="${personaje.image}" alt="imagen del personaje">
+                    <img class="img-comic w-full bg-amarillo cursor-pointer" src="${personaje.image}" alt="imagen del personaje">
                     <h3 class="my-2 font-sofia font-sofia-800">${personaje.name}</h3>
-                    <img class="non-scaling" src="./assets/svg/linea.svg" alt="decorativo">
+                    <img class="non-scaling " src="./assets/svg/linea.svg" alt="decorativo">
                 </article>
             `
         } 
+    
     } else if (selectType === "episode") {
 
         for (const episodio of arrayDatos) {
@@ -197,15 +198,20 @@ function pintarDatos(arrayDatos) {
             `
         } 
     }
+    
 }
 
 
 function clicImagenes() {
 
-    $imgComic.forEach(img => {
+    $$(".img-comic").forEach(img => {
         img.addEventListener("click", () => {
 
-            
+            $containerCards .classList.remove("flex")
+            $containerCards .classList.add("hidden")
+    
+            $containerDetailsPersonajes.classList.remove("hidden")
+            $containerDetailsPersonajes.classList.add("flex") 
         })
     })
 }
@@ -301,6 +307,7 @@ window.onload = async () => {
     cargandoDatos()
     await obtenerDatos(currentPage);
     pintarDatos(elements)
+    clicImagenes() 
 };
 
 
