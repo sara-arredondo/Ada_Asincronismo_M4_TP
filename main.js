@@ -211,7 +211,7 @@ function clicImagenes() {
             const card = event.target.closest("article");  
             const characterId = card.getAttribute("id");
 
-            const personaje = elements.find(personaje => personaje.id === characterId);
+            const personaje = elements.find(personaje => personaje.id.toString() === characterId);
 
             $containerCards.classList.remove("flex");
             $containerCards.classList.add("hidden");
