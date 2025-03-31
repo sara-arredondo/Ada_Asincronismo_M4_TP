@@ -36,6 +36,7 @@ const repulsionStrength = 300;
 
 let elements = []
 let totalElements = []
+let arrayEpisodes = []
 let currentPage = 1;
 let selectType = "character"
 let selectStatus = ""
@@ -151,10 +152,10 @@ async function obtenerDatos(page) {
 
     cargandoDatos()
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    //await new Promise(resolve => setTimeout(resolve, 200));
 
     try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
+        const { data } = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
         });
 
         elements = data.results
@@ -227,8 +228,8 @@ function clicImagenes() {
 
 function pintarDatosPersonajes(personaje) {
 
-        $containerDetailsPersonajes.innerHTML = `
-             <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
+    $containerDetailsPersonajes.innerHTML = `
+            <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
                     <div class="flex flex-col m-auto">
                         <img src="${personaje.image}" alt="" class="w-96 h-96 bg-negro">
                     </div>
@@ -261,17 +262,20 @@ function pintarDatosPersonajes(personaje) {
                 <div>
                     <div class="mt-8">
                         <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Episodios relacionados</h1>
-                    </div>
-    
-                    <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                        <h3 class="h-18 my-2font-sofia font-sofia-800">Episodio N°</h3>    
-                        <h3 class="h-18 my-2 font-sofia font-sofia-500"></h3>
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                    </article>
-    
-                </div>
+                    </div>`
+
+    for (let i = 0; i < personaje.episode.length; i++) {
+                    
+
+        $containerDetailsPersonajes.innerHTML += `
+            <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                <h3 class="h-18 my-2 font-sofia font-sofia-800">Episodio ${personaje.episode.id}</h3>
+                <h3 class="h-18 my-2 font-sofia font-sofia-500">Nombre del episodio</h3>
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+            </article>
         `
+    }
 }
 
 //----------------- funciones paginacion-----------------------------------------------
