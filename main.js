@@ -158,15 +158,39 @@ async function obtenerDatos(page) {
         const { data } = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
         });
 
+    
         elements = data.results
         totalElements = data.info.count
         $cantidadResultados.textContent = totalElements
-        pintarDatos(elements)
         console.log(elements);
+        pintarDatos(elements)
+        
     } catch (error) {
         console.error(error)
     }
 }
+
+
+async function obtenerDetailsPersonajes() {
+
+    try {
+
+       const { data } = await axios(`https://rickandmortyapi.com/api/character/1`);
+       for (const element of data.episode) {
+
+          try {
+
+             const { data } = await axios(element);
+             console.log(data);
+             
+          } catch (error) {
+             console.log(error);
+          }
+       }
+    } catch (error) {
+       console.log(error);
+    }
+ }
 
 function pintarDatos(arrayDatos) {
 
@@ -369,6 +393,7 @@ window.onload = async () => {
     await obtenerDatos(currentPage);
     pintarDatos(elements)
     clicImagenes()
+    await obtenerDetailsPersonajes()
 };
 
 
