@@ -42,6 +42,7 @@ let selectType = "character"
 let selectStatus = ""
 let selectGender = ""
 let filterName = ""
+let characterId = ""
 
 
 
@@ -172,17 +173,14 @@ async function obtenerDatos(page) {
 
 
 async function obtenerDetailsPersonajes() {
-
     try {
-
        const { data } = await axios(`https://rickandmortyapi.com/api/character/1`);
        for (const element of data.episode) {
-
           try {
-
-             const { data } = await axios(element);
-             console.log(data);
-             
+             // Realizamos la petición a la URL del episodio usando axios
+             const { data: episodeData } = await axios(element);
+             console.log(episodeData);
+             arrayEpisodes.push(episodeData);
           } catch (error) {
              console.log(error);
           }
@@ -191,6 +189,7 @@ async function obtenerDetailsPersonajes() {
        console.log(error);
     }
  }
+
 
 function pintarDatos(arrayDatos) {
 
@@ -234,7 +233,7 @@ function clicImagenes() {
             // me ahorro tener que recorrerlo manualmente]
 
             const card = event.target.closest("article");  
-            const characterId = card.getAttribute("id");
+            characterId = card.getAttribute("id");
 
             const personaje = elements.find(personaje => personaje.id.toString() === characterId);
 
@@ -250,7 +249,7 @@ function clicImagenes() {
     
 }
 
-function pintarDatosPersonajes(personaje) {
+async function pintarDatosPersonajes(personaje) {
 
     $containerDetailsPersonajes.innerHTML = `
             <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
@@ -287,19 +286,19 @@ function pintarDatosPersonajes(personaje) {
                     <div class="mt-8">
                         <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Episodios relacionados</h1>
                     </div>`
-
-    for (let i = 0; i < personaje.episode.length; i++) {
+       
                     
-
-        $containerDetailsPersonajes.innerHTML += `
-            <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
-                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                <h3 class="h-18 my-2 font-sofia font-sofia-800">Episodio ${personaje.episode.id}</h3>
-                <h3 class="h-18 my-2 font-sofia font-sofia-500">Nombre del episodio</h3>
-                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-            </article>
-        `
-    }
+            for (const episode of arrayEpisodes) {
+                
+                $containerDetailsPersonajes.innerHTML += `
+                    <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                        <h3 class="h-18 my-2 font-sofia font-sofia-800">Episodio ${episode.id}</h3>
+                        <h3 class="h-18 my-2 font-sofia font-sofia-500">${episode.name}</h3>
+                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                    </article>
+                `
+            }
 }
 
 //----------------- funciones paginacion-----------------------------------------------
