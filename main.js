@@ -172,12 +172,17 @@ async function obtenerDatos(page) {
 }
 
 
-async function obtenerDetailsPersonajes() {
+async function obtenerDetailsPersonajes(characterId) {
+
     try {
-       const { data } = await axios(`https://rickandmortyapi.com/api/character/1`);
-       for (const element of data.episode) {
-          try {
-             // Realizamos la petición a la URL del episodio usando axios
+
+        arrayEpisodes = [];
+
+        const { data } = await axios(`https://rickandmortyapi.com/api/character/${characterId}`);
+
+        for (const element of data.episode) {
+            try {
+             
              const { data: episodeData } = await axios(element);
              console.log(episodeData);
              arrayEpisodes.push(episodeData);
@@ -287,6 +292,7 @@ async function pintarDatosPersonajes(personaje) {
                         <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Episodios relacionados</h1>
                     </div>`
        
+            await obtenerDetailsPersonajes(personaje.id);
                     
             for (const episode of arrayEpisodes) {
                 
