@@ -339,6 +339,11 @@ async function pintarDatosPersonajes(personaje) {
 //----------------- funciones paginacion-----------------------------------------------
 
 $buttonNext.addEventListener("click", async () => {
+
+    if (currentPage === 42) {
+        $containerCards.innerHTML = `<div class="text-center font-bold text-lg py-4">No hay más resultados</div>`;
+        return;
+      }
     
     $containerCards.innerHTML = "";
     cargandoDatos()
