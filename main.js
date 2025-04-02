@@ -348,11 +348,15 @@ function actualizarBotonesPaginacion() {
     if (currentPage <= 1) {
       $buttonPrevious.disabled = true;
       $buttonPrevious.classList.add("opacity-50", "cursor-not-allowed");
+      $buttonFirst.disabled = true;
+      $buttonFirst.classList.add("opacity-50", "cursor-not-allowed");
     } else {
       $buttonPrevious.disabled = false;
       $buttonPrevious.classList.remove("opacity-50", "cursor-not-allowed");
+      $buttonFirst.disabled = false;
+      $buttonFirst.classList.remove("opacity-50", "cursor-not-allowed");
+      
     }
-    
     
     if (currentPage >= 42) {
       $buttonNext.disabled = true;
@@ -442,24 +446,30 @@ $buttonLast.addEventListener("click", async () => {
 })
     
 $buttonFirst.addEventListener("click", async () => {
+
+    if (currentPage <= 1) {
+        $pageNumber.textContent = 1;
+        actualizarBotonesPaginacion();
+        return;
+    }
     
-        $containerCards.innerHTML = "";
-        cargandoDatos()
+    $containerCards.innerHTML = "";
+    cargandoDatos()
     
-        currentPage = 1
+    currentPage = 1
         
-            try {
-                const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
-                });
+        try {
+            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
+        });
     
-                elements = data.results
-                pintarDatos(elements)
-                totalElements = data.info.count;   
+            elements = data.results
+            pintarDatos(elements)
+            totalElements = data.info.count;   
                 
-                $pageNumber.textContent = currentPage
-            } catch (error) {
-                console.error("Error al cargar los comics")
-            }
+            $pageNumber.textContent = currentPage
+        } catch (error) {
+            console.error("Error al cargar los comics")
+        }
 })
 
 
