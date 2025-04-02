@@ -263,6 +263,13 @@ function clicImagenes() {
             $containerDetailsPersonajes.classList.remove("hidden");
             $containerDetailsPersonajes.classList.add("flex"); 
 
+            $containerCards.classList.add("hidden");
+            $buttonFirst.classList.add("hidden");
+            $buttonPrevious.classList.add("hidden");
+            $buttonNext.classList.add("hidden");
+            $buttonLast.classList.add("hidden");
+            $pageNumber.classList.add("hidden");
+
             pintarDatosPersonajes(personaje)
         }
     });
