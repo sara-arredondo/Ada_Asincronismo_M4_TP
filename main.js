@@ -257,54 +257,61 @@ function clicImagenes() {
 async function pintarDatosPersonajes(personaje) {
 
     $containerDetailsPersonajes.innerHTML = `
-            <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
-                    <div class="flex flex-col m-auto">
-                        <img src="${personaje.image}" alt="" class="w-96 h-96 bg-negro">
-                    </div>
-    
-                    <div>
-                        <h1 class="font-sofia font-sofia-800 text-3xl mt-4 text-negro text-center">${personaje.name}</h1>
-                        <div class="flex flex-row justify-between my-4">
-                            <h2 class="font-sofia font-sofia-800">Especie</h2>
-                            <h2 class="font-sofia font-sofia-500">${personaje.species}</h2>
-                        </div>
-    
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-    
-                        <div class="flex flex-row justify-between my-4">
-                            <h2 class="font-sofia font-sofia-800">Origen</h2>
-                            <h2 class="font-sofia font-sofia-500">${personaje.origin.name}</h2>
-                        </div>
-    
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-    
-                        <div class="flex flex-row justify-between my-4">
-                            <h2 class="font-sofia font-sofia-800">Ubicación</h2>
-                            <h2 class="font-sofia font-sofia-500">${personaje.location.name}</h2>
-                        </div>
-    
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                    </div>
+        <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
+            <div class="flex flex-col m-auto">
+            <img src="${personaje.image}" alt="" class="w-96 h-96 bg-negro">
+            </div>
+            <div>
+                <h1 class="font-sofia font-sofia-800 text-3xl mt-4 text-negro text-center">${personaje.name}</h1>
+                <div class="flex flex-row justify-between my-4">
+                    <h2 class="font-sofia font-sofia-800">Especie</h2>
+                    <h2 class="font-sofia font-sofia-500">${personaje.species}</h2>
                 </div>
-                
-                <div>
-                    <div class="mt-8">
-                        <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Episodios relacionados</h1>
-                    </div>`
+
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+
+                <div class="flex flex-row justify-between my-4">
+                    <h2 class="font-sofia font-sofia-800">Origen</h2>
+                    <h2 class="font-sofia font-sofia-500">${personaje.origin.name}</h2>
+                </div>
+
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+
+                <div class="flex flex-row justify-between my-4">
+                    <h2 class="font-sofia font-sofia-800">Ubicación</h2>
+                    <h2 class="font-sofia font-sofia-500">${personaje.location.name}</h2>
+                 </div>
+
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+            </div>
+        </div>
+
+        <!-- Contenedor de episodios -->
+
+        <div id="episodes-container">
+            <div class="mt-8">
+                <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Episodios relacionados</h1>
+            </div>
+      
+            <div id="container-episodes" class="w-full py-8 h-fit sm:flex-wrap flex flex-col sm:flex-row sm:justify-between sm:gap-2"></div>
+        </div>
+  `;
        
-            await obtenerDetailsPersonajes(personaje.id);
+    await obtenerDetailsPersonajes(personaje.id);
+
+    const containerCardsEpisodes = document.getElementById("container-episodes");
                     
-            for (const episode of arrayEpisodes) {
+    for (const episode of arrayEpisodes) {
                 
-                $containerDetailsPersonajes.innerHTML += `
-                    <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                        <h3 class="h-18 my-2 font-sofia font-sofia-800">Episodio ${episode.id}</h3>
-                        <h3 class="h-18 my-2 font-sofia font-sofia-500">${episode.name}</h3>
-                        <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                    </article>
-                `
-            }
+        containerCardsEpisodes.innerHTML += `
+        
+            <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
+                <h3 class="h-18 my-2 font-sofia font-sofia-800">Episodio ${episode.id}</h3>
+                <h3 class="h-18 font-sofia font-sofia-500">${episode.name}</h3>
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+            </article>
+            `
+    }
 }
 
 //----------------- funciones paginacion-----------------------------------------------
