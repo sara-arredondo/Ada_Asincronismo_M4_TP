@@ -284,13 +284,13 @@ function clicImagenes() {
 async function pintarDatosPersonajes(personaje) {
 
     $containerDetailsPersonajes.innerHTML = `
-        <div class="flex flex-col lg:gap-12 lg:w-1/3 lg:m-auto">
+        <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
             <div class="flex flex-col m-auto">
-            <img src="${personaje.image}" alt="" class="w-96 h-96 bg-negro">
+                <img src="${personaje.image}" alt="${personaje.name}" class=" bg-negro">
             </div>
-            <div>
+            <div class="md:">
                 <h1 class="font-sofia font-sofia-800 text-3xl mt-4 text-negro text-center">${personaje.name}</h1>
-                <div class="flex flex-row justify-between my-4">
+                <div class="flex flex-row  justify-between my-4">
                     <h2 class="font-sofia font-sofia-800">Especie</h2>
                     <h2 class="font-sofia font-sofia-500">${personaje.species}</h2>
                 </div>
