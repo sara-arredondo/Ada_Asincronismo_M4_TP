@@ -130,6 +130,7 @@ $formBusqueda.addEventListener("submit", (event) => {
 
     event.preventDefault();
 
+   
     filterName = $inputBusqueda.value;
 
     selectStatus = $inputStatus.value;
@@ -142,7 +143,7 @@ $formBusqueda.addEventListener("submit", (event) => {
   });
 
 
-  $inputType.addEventListener("change", () => {
+$inputType.addEventListener("change", () => {
     selectType = $inputType.value;
     console.log("Tipo seleccionado:", selectType);
     
@@ -153,7 +154,7 @@ $formBusqueda.addEventListener("submit", (event) => {
       $containerInputStatus.classList.remove("hidden");
       $containerInputGender.classList.remove("hidden");
     }
-  });  
+});  
 
 //----------------- funciones pricipales  -----------------------------------------------
 
@@ -184,9 +185,13 @@ async function obtenerDatos(page) {
         
     } catch (error) {
         console.error(error)
+
+        if (error.response && error.response.status === 404) {
+            $containerCards.innerHTML = `<div class="text-center font-bold text-lg py-4">No se han encontrado resultados</div>`;
+            $cantidadResultados.textContent = "0";
+        }
     }
 }
-
 
 async function obtenerDetailsPersonajes(characterId) {
 
@@ -209,8 +214,7 @@ async function obtenerDetailsPersonajes(characterId) {
     } catch (error) {
        console.log(error);
     }
- }
-
+}
 
 function pintarDatos(arrayDatos) {
 
@@ -357,8 +361,7 @@ function actualizarBotonesPaginacion() {
       $buttonNext.disabled = false;
       $buttonNext.classList.remove("opacity-50", "cursor-not-allowed");
     }
-  }
-
+}
 
 
 $buttonNext.addEventListener("click", async () => {
@@ -458,9 +461,6 @@ $buttonFirst.addEventListener("click", async () => {
                 console.error("Error al cargar los comics")
             }
 })
-
-
-
 
 
 window.onload = async () => {
