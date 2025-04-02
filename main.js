@@ -29,6 +29,7 @@ const $buttonPrevious = $("#button-previous")
 const $buttonNext = $("#button-next")
 const $buttonLast = $("#button-last")
 const $pageNumber = $("#page-number")
+const totalPages = 42;
 
 //variables y arrays 
 const bat = [];
@@ -338,9 +339,31 @@ async function pintarDatosPersonajes(personaje) {
 
 //----------------- funciones paginacion-----------------------------------------------
 
+function actualizarBotonesPaginacion() {
+    
+    if (currentPage <= 1) {
+      $buttonPrevious.disabled = true;
+      $buttonPrevious.classList.add("opacity-50", "cursor-not-allowed");
+    } else {
+      $buttonPrevious.disabled = false;
+      $buttonPrevious.classList.remove("opacity-50", "cursor-not-allowed");
+    }
+    
+    
+    if (currentPage >= 42) {
+      $buttonNext.disabled = true;
+      $buttonNext.classList.add("opacity-50", "cursor-not-allowed");
+    } else {
+      $buttonNext.disabled = false;
+      $buttonNext.classList.remove("opacity-50", "cursor-not-allowed");
+    }
+  }
+
+
+
 $buttonNext.addEventListener("click", async () => {
 
-    if (currentPage === 42) {
+    if (currentPage === totalPages) {
         $containerCards.innerHTML = `<div class="text-center font-bold text-lg py-4">No hay más resultados</div>`;
         return;
       }
@@ -357,13 +380,20 @@ $buttonNext.addEventListener("click", async () => {
         elements = data.results
         pintarDatos(elements)
         $pageNumber.textContent = currentPage
+        actualizarBotonesPaginacion();
     } catch (error) {
         console.error("Error al cargar los comics")
     }
 })
 
 $buttonPrevious.addEventListener("click", async () => {
-    
+
+    if (currentPage <= 1) {
+        $pageNumber.textContent = 1;
+        actualizarBotonesPaginacion();
+        return;
+      }
+      
     $containerCards.innerHTML = "";
     cargandoDatos()
 
@@ -380,50 +410,57 @@ $buttonPrevious.addEventListener("click", async () => {
         console.error("Error al cargar los comics")
     }
 })
-
+    
 $buttonLast.addEventListener("click", async () => {
 
+    if (currentPage === totalPages) {
+        $containerCards.innerHTML = `<div class="text-center font-bold text-lg py-4">No hay más resultados</div>`;
+        return;
+      }
+    
     $containerCards.innerHTML = "";
     cargandoDatos()
-
-    currentPage = Math.ceil(totalElements / 20)
+    
+    currentPage = totalPages
     console.log(currentPage)
+        
+    try {
+        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
+        });
     
-
-        try {
-            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
-            });
-
-            elements = data.results
-            pintarDatos(elements)
-            totalElements = data.info.count;   
-            
-            $pageNumber.textContent = currentPage
-        } catch (error) {
-            console.error("Error al cargar los comics")
-        }
+        elements = data.results
+        pintarDatos(elements)
+        totalElements = data.info.count;   
+                
+        $pageNumber.textContent = currentPage
+    } catch (error) {
+        console.error("Error al cargar los comics")
+    }
 })
-
+    
 $buttonFirst.addEventListener("click", async () => {
-
-    $containerCards.innerHTML = "";
-    cargandoDatos()
-
-    currentPage = 1
     
-        try {
-            const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
-            });
-
-            elements = data.results
-            pintarDatos(elements)
-            totalElements = data.info.count;   
-            
-            $pageNumber.textContent = currentPage
-        } catch (error) {
-            console.error("Error al cargar los comics")
-        }
+        $containerCards.innerHTML = "";
+        cargandoDatos()
+    
+        currentPage = 1
+        
+            try {
+                const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}`, {    
+                });
+    
+                elements = data.results
+                pintarDatos(elements)
+                totalElements = data.info.count;   
+                
+                $pageNumber.textContent = currentPage
+            } catch (error) {
+                console.error("Error al cargar los comics")
+            }
 })
+
+
+
 
 
 window.onload = async () => {
