@@ -11,7 +11,8 @@ const $inputBusqueda = $("#input-busqueda")
 const $inputType = $("#input-type")
 const $inputStatus = $("#input-status")
 const $inputGender = $("#input-gender")
-const $buttonBusqueda = $("#button-busqueda")
+const $containerInputStatus = $("#container-input-status")
+const $containerInputGender = $("#container-input-gender")
 
 //selectores pintar datos
 const $cantidadResultados = $("#cantidad-resultados")
@@ -129,7 +130,7 @@ $formBusqueda.addEventListener("submit", (event) => {
     event.preventDefault();
 
     filterName = $inputBusqueda.value;
-    selectType = $inputType.value;
+
     selectStatus = $inputStatus.value;
     selectGender = $inputGender.value;
 
@@ -137,7 +138,21 @@ $formBusqueda.addEventListener("submit", (event) => {
     $pageNumber.textContent = currentPage;
 
     obtenerDatos(currentPage);
-})
+  });
+
+
+  $inputType.addEventListener("change", () => {
+    selectType = $inputType.value;
+    console.log("Tipo seleccionado:", selectType);
+    
+    if (selectType === "episode") {
+      $containerInputStatus.classList.add("hidden");
+      $containerInputGender.classList.add("hidden");
+    } else {
+      $containerInputStatus.classList.remove("hidden");
+      $containerInputGender.classList.remove("hidden");
+    }
+  });  
 
 //----------------- funciones pricipales  -----------------------------------------------
 
