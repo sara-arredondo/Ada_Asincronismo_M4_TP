@@ -38,13 +38,16 @@ const repulsionStrength = 300;
 
 let elements = []
 let totalElements = []
-let arrayEpisodes = []
+let arrayEpisodesDetails = []
+let arrayCharactersDetails
+let totalarrayEpisodes = []
 let currentPage = 1;
 let selectType = "character"
 let selectStatus = ""
 let selectGender = ""
 let filterName = ""
 let characterId = ""
+
 
 
 
@@ -197,7 +200,7 @@ async function obtenerDetailsPersonajes(characterId) {
 
     try {
 
-        arrayEpisodes = [];
+        arrayEpisodesDetails = [];
 
         const { data } = await axios(`https://rickandmortyapi.com/api/character/${characterId}`);
 
@@ -206,13 +209,38 @@ async function obtenerDetailsPersonajes(characterId) {
              
              const { data: episodeData } = await axios(element);
              console.log(episodeData);
-             arrayEpisodes.push(episodeData);
-          } catch (error) {
+             arrayEpisodesDetails.push(episodeData);
+             
+            } catch (error) {
              console.log(error);
           }
        }
     } catch (error) {
        console.log(error);
+    }
+}
+
+async function obtenerDetailsEpisodios() {
+
+    try {
+
+        arrayCharactersDetails = [];
+
+        const { data } = await axios(`https://rickandmortyapi.com/api/episode/${episodeId}`)
+
+        for (const element of data.characters) {
+            try {
+
+            const { data: characterData } = await axios(element);
+            console.log(characterData);
+            arrayCharactersDetails.push(characterData);
+
+            } catch(error) {
+            console.log(error)
+            }
+        }
+    } catch(error) {
+        console.log(error);
     }
 }
 
@@ -343,6 +371,7 @@ async function pintarDatosPersonajes(personaje) {
 
 //----------------- funciones paginacion-----------------------------------------------
 
+
 function actualizarBotonesPaginacion() {
     
     if (currentPage <= 1) {
@@ -366,7 +395,6 @@ function actualizarBotonesPaginacion() {
       $buttonNext.classList.remove("opacity-50", "cursor-not-allowed");
     }
 }
-
 
 $buttonNext.addEventListener("click", async () => {
 
