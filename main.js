@@ -38,8 +38,7 @@ const repulsionStrength = 300;
 
 let elements = []
 let totalElements = []
-let arrayEpisodesDetails = []
-let arrayCharactersDetails
+let arrayCharactersDetails = []
 let totalarrayEpisodes = []
 let currentPage = 1;
 let selectType = "character"
@@ -200,7 +199,7 @@ async function obtenerDetailsPersonajes(characterId) {
 
     try {
 
-        arrayEpisodesDetails = [];
+        arrayCharactersDetails = [];
 
         const { data } = await axios(`https://rickandmortyapi.com/api/character/${characterId}`);
 
@@ -209,7 +208,7 @@ async function obtenerDetailsPersonajes(characterId) {
              
              const { data: episodeData } = await axios(element);
              console.log(episodeData);
-             arrayEpisodesDetails.push(episodeData);
+             arrayCharactersDetails.push(episodeData);
              
             } catch (error) {
              console.log(error);
@@ -220,13 +219,13 @@ async function obtenerDetailsPersonajes(characterId) {
     }
 }
 
-async function obtenerDetailsEpisodios() {
+/*async function obtenerDetailsEpisodios() {
 
     try {
 
         arrayCharactersDetails = [];
 
-        const { data } = await axios(`https://rickandmortyapi.com/api/episode/${episodeId}`)
+        const { data } = await axios(`https://rickandmortyapi.com/api/episode/1}`)
 
         for (const element of data.characters) {
             try {
@@ -242,7 +241,7 @@ async function obtenerDetailsEpisodios() {
     } catch(error) {
         console.log(error);
     }
-}
+}*/
 
 function pintarDatos(arrayDatos) {
 
@@ -356,7 +355,7 @@ async function pintarDatosPersonajes(personaje) {
 
     const containerCardsEpisodes = document.getElementById("container-episodes");
                     
-    for (const episode of arrayEpisodes) {
+    for (const episode of arrayCharactersDetails) {
                 
         containerCardsEpisodes.innerHTML += `
         
@@ -508,6 +507,8 @@ window.onload = async () => {
     pintarDatos(elements)
     clicImagenes()
     await obtenerDetailsPersonajes()
+    //await obtenerDetailsEpisodios() 
+
 };
 
 
