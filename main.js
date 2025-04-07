@@ -19,6 +19,7 @@ const $cantidadResultados = $("#cantidad-resultados")
 const $containerCards = $("#container-cards")
 const $imgComic = $$(".img-comic")
 const $nameComic = $("#name-comic")
+const $detailEpisode = $("#detail-episode")
 
 const $containerDetailsPersonajes = $("#container-details-personajes")
 const $containerDetailsEpisodios = $("#container-details-episodios")
@@ -220,13 +221,13 @@ async function obtenerDetailsPersonajes(characterId) {
     }
 }
 
-/*async function obtenerDetailsEpisodios() {
+async function obtenerDetailsEpisodios(episodeId) {
 
     try {
 
         arrayCharactersDetails = [];
 
-        const { data } = await axios(`https://rickandmortyapi.com/api/episode/1}`)
+        const { data } = await axios(`https://rickandmortyapi.com/api/episode/${episodeId}`)
 
         for (const element of data.characters) {
             try {
@@ -236,13 +237,13 @@ async function obtenerDetailsPersonajes(characterId) {
             arrayCharactersDetails.push(characterData);
 
             } catch(error) {
-            console.log(error)
+            console.log('no puedo perro')
             }
         }
     } catch(error) {
         console.log(error);
     }
-}*/
+}
 
 function pintarDatos(arrayDatos) {
 
@@ -265,11 +266,9 @@ function pintarDatos(arrayDatos) {
         for (const episodio of arrayDatos) {
 
             $containerCards.innerHTML += `
-                <article id="card-comic" class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
-                    <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
-                    <h3 class="h-18 m-2 font-sofia font-sofia-800">Episodio N° ${episodio.id}</h3>    
-                    <h3 class="h-18 m-2 font-sofia font-sofia-500">${episodio.name}</h3>
-                    <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+                <article id="card-comic" class="w-full h-26 mb-8 p-4 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col border border-solid border-negro  transform transition duration-300 hover:scale-105 hover:bg-rojo hover:border-transparent cursor-pointer">
+                    <h3 class="h-18 mx-2 font-sofia font-sofia-800">Episodio N° ${episodio.id}</h3>    
+                    <h3 class="mx-2"><a  class=detail-episode h-18 mx-2 font-sofia font-sofia-500 hover:cursor-pointer">${episodio.name}</a></h3>
                 </article>
             `
         } 
@@ -280,6 +279,7 @@ function pintarDatos(arrayDatos) {
 function clicImagenes() {
 
     $containerCards.addEventListener("click", (event) => {
+
         if (event.target.classList.contains("img-comic")) {
 
             // el metood closest sirve para buscar el padre m[as cercano que coincida con el selector dado, as[i
@@ -360,7 +360,7 @@ async function pintarDatosPersonajes(personaje) {
                 
         containerCardsEpisodes.innerHTML += `
         
-            <article class="w-full h-32 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
+            <article id="card-comic" class="w-full h-20 mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col justify-center">
                 <h3 class="h-18 my-2 font-sofia font-sofia-800">Episodio ${episode.id}</h3>
                 <h3 class="h-18 font-sofia font-sofia-500">${episode.name}</h3>
                 <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
@@ -369,9 +369,19 @@ async function pintarDatosPersonajes(personaje) {
     }
 }
 
+function clicEpisode() {
+   
+    const episodeLinks = document.querySelectorAll(".detail-episode");
 
+    link.addEventListener("click", (event) => {
 
+        event.preventDefault(); 
 
+        const episodeId = link.getAttribute("data-episode-id");
+        
+    
+      });
+}
 //----------------- funciones paginacion-----------------------------------------------
 
 
@@ -510,8 +520,7 @@ window.onload = async () => {
     await obtenerDatos(currentPage);
     pintarDatos(elements)
     clicImagenes()
-    await obtenerDetailsPersonajes()
-    //await obtenerDetailsEpisodios() 
+    clicEpisode() 
 
 };
 
