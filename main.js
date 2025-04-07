@@ -39,6 +39,7 @@ const repulsionStrength = 300;
 let elements = []
 let totalElements = []
 let arrayCharactersDetails = []
+let arrayEpisodesDetails = [];
 let totalarrayEpisodes = []
 let currentPage = 1;
 let selectType = "character"
@@ -199,7 +200,7 @@ async function obtenerDetailsPersonajes(characterId) {
 
     try {
 
-        arrayCharactersDetails = [];
+        arrayEpisodesDetails = [];
 
         const { data } = await axios(`https://rickandmortyapi.com/api/character/${characterId}`);
 
@@ -208,14 +209,14 @@ async function obtenerDetailsPersonajes(characterId) {
              
              const { data: episodeData } = await axios(element);
              console.log(episodeData);
-             arrayCharactersDetails.push(episodeData);
+             arrayEpisodesDetails.push(episodeData);
              
             } catch (error) {
-             console.log(error);
+                console.log(error);
           }
        }
     } catch (error) {
-       console.log(error);
+        console.log(error);
     }
 }
 
@@ -355,7 +356,7 @@ async function pintarDatosPersonajes(personaje) {
 
     const containerCardsEpisodes = document.getElementById("container-episodes");
                     
-    for (const episode of arrayCharactersDetails) {
+    for (const episode of arrayEpisodesDetails) {
                 
         containerCardsEpisodes.innerHTML += `
         
@@ -367,6 +368,9 @@ async function pintarDatosPersonajes(personaje) {
             `
     }
 }
+
+
+
 
 //----------------- funciones paginacion-----------------------------------------------
 
