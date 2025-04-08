@@ -267,7 +267,7 @@ function pintarDatos(arrayDatos) {
         for (const episodio of arrayDatos) {
 
             $containerCards.innerHTML += `
-                <article id="card-comic" class="detail-episode w-full h-32 mb-8 p-4 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col border border-solid border-negro  transform transition duration-300 hover:scale-105 hover:bg-rojo hover:border-transparent cursor-pointer">
+                <article id="${episodio.id}"  class="detail-episode w-full h-32 mb-8 p-4 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col border border-solid border-negro  transform transition duration-300 hover:scale-105 hover:bg-rojo hover:border-transparent cursor-pointer">
                     <h3 class="h-18 mx-2 font-sofia font-sofia-800">Episodio N° ${episodio.id}</h3>    
                     <h3 class="mx-2 h-18 font-sofia font-sofia-500 hover:cursor-pointer">${episodio.name}</h3>
                 </article>
@@ -332,7 +332,7 @@ function clicEpisode() {
             $buttonLast.classList.add("hidden");
             $pageNumber.classList.add("hidden");
 
-
+            pintarDatosepisodios(episodio)
         }
     });
   }
@@ -399,6 +399,41 @@ async function pintarDatosPersonajes(personaje) {
 }
 
 
+async function pintarDatosepisodios(episodio) {
+
+    $containerDetailsEpisodios.innerHTML = `
+        <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
+            <div>
+                <h1 class="font-sofia font-sofia-800 text-3xl mt-4 text-negro text-center">${episodio.name}</h1>
+                <div class="flex flex-row  justify-between my-4">
+                    <h2 class="font-sofia font-sofia-800">Episodio</h2>
+                    <h2 class="font-sofia font-sofia-500">${episodio.episode}</h2>
+                </div>
+
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+
+                <div class="flex flex-row justify-between my-4">
+                    <h2 class="font-sofia font-sofia-800">Fecha de estreno</h2>
+                    <h2 class="font-sofia font-sofia-500">${episodio.air_date}</h2>
+                </div>
+
+                <img class="non-scaling" src="./assets/svg/linea.svg" alt="">
+
+            </div>
+        </div>
+
+         <!-- Contenedor de episodios -->
+
+        <div>
+            <div class="mt-8">
+                <h1 class="font-sofia font-sofia-800 text-2xl mb-4 mt-14 text-negro md:text-center lg:text-center">Personajes relacionados</h1>
+            </div>
+      
+            <div id="container-characters" class="w-full py-8 h-fit sm:flex-wrap flex flex-col sm:flex-row sm:justify-between sm:gap-2"></div>
+        </div>
+
+    `
+}
 
 //----------------- funciones paginacion-----------------------------------------------
 
