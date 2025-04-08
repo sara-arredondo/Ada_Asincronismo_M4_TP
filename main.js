@@ -31,7 +31,7 @@ const $buttonPrevious = $("#button-previous")
 const $buttonNext = $("#button-next")
 const $buttonLast = $("#button-last")
 const $pageNumber = $("#page-number")
-const totalPages = 42;
+let totalPages = "";
 
 //variables y arrays 
 const bat = [];
@@ -178,7 +178,8 @@ async function obtenerDatos(page) {
         const { data } = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
         });
 
-    
+        totalPages = data.info.pages;
+        
         elements = data.results
         totalElements = data.info.count
         $cantidadResultados.textContent = totalElements
@@ -272,65 +273,6 @@ function pintarDatos(arrayDatos) {
         } 
     }
     
-}
-
-function clicImagenes() {
-
-    $containerCards.addEventListener("click", (event) => {
-
-        if (event.target.classList.contains("img-comic")) {
-
-            // el metood closest sirve para buscar el padre m[as cercano que coincida con el selector dado, as[i
-            // me ahorro tener que recorrerlo manualmente]
-
-            const card = event.target.closest("article");  
-            characterId = card.getAttribute("id");
-
-            const personaje = elements.find(personaje => personaje.id.toString() === characterId);
-
-            $containerCards.classList.remove("flex");
-            $containerCards.classList.add("hidden");
-    
-            $containerDetailsPersonajes.classList.remove("hidden");
-            $containerDetailsPersonajes.classList.add("flex"); 
-
-            $containerCards.classList.add("hidden");
-            $buttonFirst.classList.add("hidden");
-            $buttonPrevious.classList.add("hidden");
-            $buttonNext.classList.add("hidden");
-            $buttonLast.classList.add("hidden");
-            $pageNumber.classList.add("hidden");
-
-            pintarDatosPersonajes(personaje)
-        }
-    });
-    
-}
-
-function clicEpisode() {
-
-    $containerCards.addEventListener("click", (event) => {
-
-        if (event.target.closest(".detail-episode")) {
-
-            const card = event.target.closest("article");  
-            episodeId= card.getAttribute("id");
-
-            const episodio = elements.find(episodio => episodio.id.toString() === episodeId);
-
-            $containerCards.classList.add("hidden");
-            $containerDetailsEpisodios.classList.remove("hidden");
-            $containerDetailsEpisodios.classList.add("flex");
-
-            $buttonFirst.classList.add("hidden");
-            $buttonPrevious.classList.add("hidden");
-            $buttonNext.classList.add("hidden");
-            $buttonLast.classList.add("hidden");
-            $pageNumber.classList.add("hidden");
-
-            pintarDatosepisodios(episodio)
-        }
-    });
 }
 
 async function pintarDatosPersonajes(personaje) {
@@ -448,6 +390,67 @@ async function pintarDatosepisodios(episodio) {
 
 }
 
+function clicImagenes() {
+
+    $containerCards.addEventListener("click", (event) => {
+
+        if (event.target.classList.contains("img-comic")) {
+
+            // el metood closest sirve para buscar el padre m[as cercano que coincida con el selector dado, as[i
+            // me ahorro tener que recorrerlo manualmente]
+
+            const card = event.target.closest("article");  
+            characterId = card.getAttribute("id");
+
+            const personaje = elements.find(personaje => personaje.id.toString() === characterId);
+
+            $containerCards.classList.remove("flex");
+            $containerCards.classList.add("hidden");
+    
+            $containerDetailsPersonajes.classList.remove("hidden");
+            $containerDetailsPersonajes.classList.add("flex"); 
+
+            $containerCards.classList.add("hidden");
+            $buttonFirst.classList.add("hidden");
+            $buttonPrevious.classList.add("hidden");
+            $buttonNext.classList.add("hidden");
+            $buttonLast.classList.add("hidden");
+            $pageNumber.classList.add("hidden");
+
+            pintarDatosPersonajes(personaje)
+        }
+    });
+    
+}
+
+function clicEpisode() {
+
+    $containerCards.addEventListener("click", (event) => {
+
+        if (event.target.closest(".detail-episode")) {
+
+            const card = event.target.closest("article");  
+            episodeId= card.getAttribute("id");
+
+            const episodio = elements.find(episodio => episodio.id.toString() === episodeId);
+
+            $containerCards.classList.add("hidden");
+            $containerDetailsEpisodios.classList.remove("hidden");
+            $containerDetailsEpisodios.classList.add("flex");
+
+            $buttonFirst.classList.add("hidden");
+            $buttonPrevious.classList.add("hidden");
+            $buttonNext.classList.add("hidden");
+            $buttonLast.classList.add("hidden");
+            $pageNumber.classList.add("hidden");
+
+            pintarDatosepisodios(episodio)
+        }
+    });
+}
+
+
+
 //----------------- funciones paginacion-----------------------------------------------
 
 
@@ -530,27 +533,31 @@ $buttonLast.addEventListener("click", async () => {
     if (currentPage === totalPages) {
         $containerCards.innerHTML = `<div class="text-center font-bold text-lg py-4">No hay más resultados</div>`;
         return;
-      }
+    }
     
     $containerCards.innerHTML = "";
-    cargandoDatos($containerCards)
+    cargandoDatos($containerCards); 
     
-    currentPage = totalPages
-    console.log(currentPage)
-        
-    try {
-        const {data} = await axios(`https://rickandmortyapi.com/api/${selectType}?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`, {    
-        });
-    
-        elements = data.results
-        pintarDatos(elements)
-        totalElements = data.info.count;   
-                
-        $pageNumber.textContent = currentPage
-    } catch (error) {
-        console.error("Error al cargar los comics")
+    currentPage = totalPages;
+
+    let url;
+    if (selectType === "character") {
+        url = `https://rickandmortyapi.com/api/character?page=${currentPage}&status=${selectStatus}&gender=${selectGender}&name=${filterName}`;
+    } else if (selectType === "episode") {
+        url = `https://rickandmortyapi.com/api/episode?page=${currentPage}&name=${filterName}`;
     }
-})
+    
+    try {
+        const { data } = await axios(url);
+        elements = data.results;
+        pintarDatos(elements);
+        totalElements = data.info.count;
+                
+        $pageNumber.textContent = currentPage;
+    } catch (error) {
+        console.error(error);
+    }
+});
     
 $buttonFirst.addEventListener("click", async () => {
 
