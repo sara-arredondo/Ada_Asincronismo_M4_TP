@@ -361,11 +361,11 @@ async function pintarDatosPersonajes(personaje) {
         $containerDetailsEpisodios.classList.remove("hidden");
         $containerDetailsEpisodios.classList.add("flex");
         
-        pintarDatosepisodios(episodio);
+        pintarDatosEpisodios(episodio);
     });
 }
 
-async function pintarDatosepisodios(episodio) {
+async function pintarDatosEpisodios(episodio) {
 
     cargandoDatos($containerDetailsEpisodios);
 
@@ -404,7 +404,7 @@ async function pintarDatosepisodios(episodio) {
     `
     const containerCardscharacters = document.getElementById("container-characters");
 
-    for (const characters of arrayCharactersDetails ) {
+    for (const characters of arrayCharactersDetails) {
 
         containerCardscharacters.innerHTML += `
             <article id="${characters.id}" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
@@ -414,6 +414,19 @@ async function pintarDatosepisodios(episodio) {
         
         `
     }
+
+    containerCardscharacters.addEventListener("click", (event) => {
+
+        const card = event.target.closest("article");
+        const characterId = card.getAttribute("id");
+        const personaje = arrayCharactersDetails.find(ep => ep.id.toString() === characterId);
+   
+        $containerDetailsEpisodios.classList.add("hidden");
+        $containerDetailsPersonajes.classList.remove("hidden");
+        $containerDetailsPersonajes.classList.add("flex");
+        
+        pintarDatosPersonajes(personaje);
+    });
 
 }
 
@@ -471,7 +484,7 @@ function clicEpisode() {
             $buttonLast.classList.add("hidden");
             $pageNumber.classList.add("hidden");
 
-            pintarDatosepisodios(episodio)
+            pintarDatosEpisodios(episodio)
         }
     });
 }
