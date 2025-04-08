@@ -15,7 +15,7 @@ const $containerInputStatus = $("#container-input-status")
 const $containerInputGender = $("#container-input-gender")
 
 //selectores pintar datos
-const $cantidadResultados = $("#cantidad-resultados")
+let $cantidadResultados = $("#cantidad-resultados")
 const $containerCards = $("#container-cards")
 const $imgComic = $$(".img-comic")
 const $nameComic = $("#name-comic")
@@ -182,7 +182,6 @@ async function obtenerDatos(page) {
         
         elements = data.results
         totalElements = data.info.count
-        $cantidadResultados.textContent = totalElements
         console.log(elements);
         pintarDatos(elements)
         
@@ -215,6 +214,9 @@ async function obtenerDetailsPersonajes(characterId) {
                 console.log(error);
           }
        }
+
+        $cantidadResultados.textContent = arrayEpisodesDetails.length;
+
     } catch (error) {
         console.log(error);
     }
@@ -239,6 +241,9 @@ async function obtenerDetailsEpisodios(episodeId) {
             console.log('no puedo perro')
             }
         }
+
+        $cantidadResultados.textContent = arrayCharactersDetails.length;
+
     } catch(error) {
         console.log(error);
     }
@@ -247,6 +252,8 @@ async function obtenerDetailsEpisodios(episodeId) {
 function pintarDatos(arrayDatos) {
 
     $containerCards.innerHTML = "";
+
+    $cantidadResultados.textContent = totalElements
 
     if(selectType === "character") {
 
@@ -280,6 +287,7 @@ async function pintarDatosPersonajes(personaje) {
     cargandoDatos($containerDetailsPersonajes);
 
     await obtenerDetailsPersonajes(personaje.id);
+
     
     $containerDetailsPersonajes.innerHTML = `
         <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
