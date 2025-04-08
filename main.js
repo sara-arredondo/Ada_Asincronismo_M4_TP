@@ -51,9 +51,6 @@ let filterName = ""
 let characterId = ""
 
 
-
-
-
 // ---------- funciones hero --------------------------------------------
 
 window.addEventListener("mousemove", (event) => {
@@ -163,17 +160,17 @@ $inputType.addEventListener("change", () => {
 
 //----------------- funciones pricipales  -----------------------------------------------
 
-function cargandoDatos() {
-    $containerCards.innerHTML = `
-    
-        <div class="flex justify-center items-center w-full h-96">
-            <div class="lds-circle"><div></div></div>
-        </div>`;
+function cargandoDatos(contenedor) {
+    contenedor.innerHTML = `
+      <div class="flex justify-center items-center w-full h-96">
+        <div class="lds-circle"><div></div></div>
+      </div>
+    `;
 }
 
 async function obtenerDatos(page) {
 
-    cargandoDatos()
+    cargandoDatos($containerCards)
 
     //await new Promise(resolve => setTimeout(resolve, 200));
 
@@ -310,7 +307,6 @@ function clicImagenes() {
     
 }
 
-
 function clicEpisode() {
 
     $containerCards.addEventListener("click", (event) => {
@@ -335,12 +331,14 @@ function clicEpisode() {
             pintarDatosepisodios(episodio)
         }
     });
-  }
-
-
+}
 
 async function pintarDatosPersonajes(personaje) {
 
+    cargandoDatos($containerDetailsPersonajes);
+
+    await obtenerDetailsPersonajes(personaje.id);
+    
     $containerDetailsPersonajes.innerHTML = `
         <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
             <div class="flex flex-col m-auto">
@@ -382,7 +380,7 @@ async function pintarDatosPersonajes(personaje) {
         </div>
   `;
        
-    await obtenerDetailsPersonajes(personaje.id);
+    
 
     const containerCardsEpisodes = document.getElementById("container-episodes");
                     
@@ -398,8 +396,11 @@ async function pintarDatosPersonajes(personaje) {
     }
 }
 
-
 async function pintarDatosepisodios(episodio) {
+
+    cargandoDatos($containerDetailsEpisodios);
+
+    await obtenerDetailsEpisodios(episodio.id)
 
     $containerDetailsEpisodios.innerHTML = `
         <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
@@ -431,8 +432,20 @@ async function pintarDatosepisodios(episodio) {
       
             <div id="container-characters" class="w-full py-8 h-fit sm:flex-wrap flex flex-col sm:flex-row sm:justify-between sm:gap-2"></div>
         </div>
-
     `
+    const containerCardscharacters = document.getElementById("container-characters");
+
+    for (const characters of arrayCharactersDetails ) {
+
+        containerCardscharacters.innerHTML += `
+            <article id="${characters.id}" class="w-full h-fit mb-8 sm:w-1/4 sm:justify-between md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)]">
+                <img class="img-comic w-full bg-amarillo cursor-pointer transform transition duration-300 hover:scale-105" src="${characters.image}" alt="imagen del personaje">
+                <h3 class="my-2 font-sofia font-sofia-800">${characters.name}</h3>
+            </article>
+        
+        `
+    }
+
 }
 
 //----------------- funciones paginacion-----------------------------------------------
@@ -470,7 +483,7 @@ $buttonNext.addEventListener("click", async () => {
       }
     
     $containerCards.innerHTML = "";
-    cargandoDatos()
+    cargandoDatos($containerCards)
 
     currentPage += 1
 
@@ -496,7 +509,7 @@ $buttonPrevious.addEventListener("click", async () => {
       }
       
     $containerCards.innerHTML = "";
-    cargandoDatos()
+    cargandoDatos($containerCards)
 
     currentPage -= 1
 
@@ -520,7 +533,7 @@ $buttonLast.addEventListener("click", async () => {
       }
     
     $containerCards.innerHTML = "";
-    cargandoDatos()
+    cargandoDatos($containerCards)
     
     currentPage = totalPages
     console.log(currentPage)
@@ -548,7 +561,7 @@ $buttonFirst.addEventListener("click", async () => {
     }
     
     $containerCards.innerHTML = "";
-    cargandoDatos()
+    cargandoDatos($containerCards)
     
     currentPage = 1
         
@@ -569,7 +582,7 @@ $buttonFirst.addEventListener("click", async () => {
 
 window.onload = async () => {
     interaccionBats();
-    cargandoDatos()
+    cargandoDatos($containerCards)
     await obtenerDatos(currentPage);
     pintarDatos(elements)
     clicImagenes()
