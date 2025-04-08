@@ -296,7 +296,6 @@ async function pintarDatosPersonajes(personaje) {
 
     await obtenerDetailsPersonajes(personaje.id);
 
-    
     $containerDetailsPersonajes.innerHTML = `
         <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
             <div class="flex flex-col m-auto">
@@ -336,22 +335,34 @@ async function pintarDatosPersonajes(personaje) {
       
             <div id="container-episodes" class="w-full py-8 h-fit sm:flex-wrap flex flex-col sm:flex-row sm:justify-between sm:gap-2"></div>
         </div>
-  `;
-       
-    
 
+        `;
+       
     const containerCardsEpisodes = document.getElementById("container-episodes");
                     
     for (const episode of arrayEpisodesDetails) {
                 
         containerCardsEpisodes.innerHTML += `
         
-            <article id="card-comic" class="detail-episode w-full h-32 mb-8 p-4 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col border border-solid border-negro  transform transition duration-300 hover:scale-105 hover:bg-rojo hover:border-transparent cursor-pointer">
+            <article id=${episode.id} class="detail-episode w-full h-32 mb-8 p-4 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/7)] flex flex-col border border-solid border-negro  transform transition duration-300 hover:scale-105 hover:bg-rojo hover:border-transparent cursor-pointer">
                 <h3 class="h-18 mx-2 font-sofia font-sofia-800">Episodio N° ${episode.id}</h3>    
                 <h3 class="mx-2 h-18 font-sofia font-sofia-500 hover:cursor-pointer">${episode.name}</h3>
             </article>
         `
     }
+
+    containerCardsEpisodes.addEventListener("click", (event) => {
+
+        const card = event.target.closest("article");
+        const episodeId = card.getAttribute("id");
+        const episodio = arrayEpisodesDetails.find(ep => ep.id.toString() === episodeId);
+   
+        $containerDetailsPersonajes.classList.add("hidden");
+        $containerDetailsEpisodios.classList.remove("hidden");
+        $containerDetailsEpisodios.classList.add("flex");
+        
+        pintarDatosepisodios(episodio);
+    });
 }
 
 async function pintarDatosepisodios(episodio) {
