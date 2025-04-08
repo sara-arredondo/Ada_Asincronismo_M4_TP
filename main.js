@@ -154,8 +154,9 @@ $formBusqueda.addEventListener("submit", (event) => {
 
 
 $inputType.addEventListener("change", () => {
+
     selectType = $inputType.value;
-    console.log("Tipo seleccionado:", selectType);
+    
     
     if (selectType === "episode") {
       $containerInputStatus.classList.add("hidden");
@@ -297,7 +298,7 @@ async function pintarDatosPersonajes(personaje) {
     await obtenerDetailsPersonajes(personaje.id);
 
     $containerDetailsPersonajes.innerHTML = `
-        <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 lg:m-auto">
+        <div class="flex flex-col m-auto gap-12 sm:w-1/2 md:w-1/2 sm:flex-col lg:w-1/2 sm:w-full lg:m-auto">
             <div class="flex flex-col m-auto">
                 <img src="${personaje.image}" alt="${personaje.name}" class=" bg-negro">
             </div>
