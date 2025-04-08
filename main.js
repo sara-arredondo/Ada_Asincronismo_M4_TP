@@ -129,12 +129,20 @@ function interaccionBats() {
 //----------------- funcion de filtros -----------------------------------------------
 
 $formBusqueda.addEventListener("submit", (event) => {
-
     event.preventDefault();
 
-   
-    filterName = $inputBusqueda.value;
+    $containerDetailsPersonajes.classList.add("hidden");
+    $containerDetailsEpisodios.classList.add("hidden");
+    
+    $containerCards.classList.remove("hidden");
+    $containerCards.classList.add("flex"); 
+    $buttonFirst.classList.remove("hidden");
+    $buttonPrevious.classList.remove("hidden");
+    $buttonNext.classList.remove("hidden");
+    $buttonLast.classList.remove("hidden");
+    $pageNumber.classList.remove("hidden");
 
+    filterName = $inputBusqueda.value;
     selectStatus = $inputStatus.value;
     selectGender = $inputGender.value;
 
@@ -142,7 +150,7 @@ $formBusqueda.addEventListener("submit", (event) => {
     $pageNumber.textContent = currentPage;
 
     obtenerDatos(currentPage);
-  });
+});
 
 
 $inputType.addEventListener("change", () => {
